@@ -95,9 +95,10 @@ CREATE TABLE EmployeeRole(
  employee_id INT REFERENCES Employee(SSN),
  role_id INT REFERENCES Role(role_id)
  PRIMARY KEY(employee_id, role_id)
-)
+);
 
-CREATE TABLE Archive {
+
+CREATE TABLE Archive (
     archive_id SERIAL PRIMARY KEY,
     room_number INT NOT NULL,
     street_number INT NOT NULL,
@@ -116,4 +117,5 @@ CREATE TABLE Archive {
     CONSTRAINT archive_id CHECK (archive_id > 0),
     CONSTRAINT street_number CHECK (street_number > 0),
     CONSTRAINT room_number CHECK (room_number > 0)
-};
+);
+
