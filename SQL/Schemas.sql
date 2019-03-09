@@ -9,8 +9,8 @@ CREATE TABLE HotelChain (
  province VARCHAR(255) NOT NULL,
  country VARCHAR(255) NOT NULL,
  zip VARCHAR(255) NOT NULL,
- constraint street_number check (street_number >= 0),
- constraint num_hotels check (num_hotels >= 0)
+ CONSTRAINT street_number CHECK (street_number > 0),
+ CONSTRAINT num_hotels CHECK (num_hotels >= 0)
 );
 
 CREATE TABLE ChainPhoneNumber(
@@ -31,7 +31,7 @@ CREATE TABLE Hotel (
  province VARCHAR(255) NOT NULL,
  country VARCHAR(255) NOT NULL,
  zip VARCHAR(255) NOT NULL,
- CONSTRAINT street_number check (street_number >= 0),
+ CONSTRAINT street_number check (street_number > 0),
  CONSTRAINT categoryabove check (category >= 1),
  CONSTRAINT categorybelow check (category <= 5)
 );
@@ -52,9 +52,9 @@ CREATE TABLE Room(
   mountain_view BOOLEAN NOT NULL,
   damages BOOLEAN NOT NULL,
   can_be_extended BOOLEAN NOT NULL,
-  CONSTRAINT room_number check (room_number >=1),
-  CONSTRAINT price check (price >= 0),
-  CONSTRAINT capacity check (capacity >= 0)
+  CONSTRAINT room_number CHECK (room_number > 0),
+  CONSTRAINT price CHECK (price >= 0),
+  CONSTRAINT capacity CHECK (capacity > 0)
 );
 
 CREATE TABLE Amenity(
@@ -75,8 +75,8 @@ CREATE TABLE Employee (
  country VARCHAR(255) NOT NULL,
  zip VARCHAR(255) NOT NULL,
  password VARCHAR(255) NOT NULL,
- constraint street_number check (street_number >= 0),
- constraint password check (char_length(password) >= 5)
+ CONSTRAINT street_number CHECK (street_number >= 0),
+ CONSTRAINT password CHECK (char_length(password) >= 5)
 );
 
 CREATE TABLE Manages(
@@ -96,3 +96,24 @@ CREATE TABLE EmployeeRole(
  role_id INT REFERENCES Role(role_id)
  PRIMARY KEY(employee_id, role_id)
 )
+
+CREATE TABLE Archive {
+    archive_id SERIAL PRIMARY KEY,
+    room_number INT NOT NULL,
+    street_number INT NOT NULL,
+    street_name VARCHAR(255) NOT NULL,
+    unit VARCHAR(255),
+    hotel_city VARCHAR(255) NOT NULL,
+    hotel_state VARCHAR(255) NOT NULL,
+    hotel_zip VARCHAR(255) NOT NULL,
+    hotel_country VARCHAR(255) NOT NULL,
+    check_in_date TIMESTAMP NOT NULL,
+    hotel_chain VARCHAR(255) NOT NULL,
+    reservation_date TIMESTAMP,
+    check_out_date TIMESTAMP NOT NULL,
+    customer_ssn INT NOT NULL,
+    employee_ssn INT NOT NULL,
+    CONSTRAINT archive_id CHECK (archive_id > 0),
+    CONSTRAINT street_number CHECK (street_number > 0),
+    CONSTRAINT room_number CHECK (room_number > 0)
+};
