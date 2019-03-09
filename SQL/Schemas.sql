@@ -23,7 +23,6 @@ CREATE TABLE ChainPhoneNumber(
 CREATE TABLE Hotel (
  hotel_id SERIAL PRIMARY KEY,
  chain_id INTEGER REFERENCES HotelChain(chain_id),
- manager_id INTEGER REFERENCES Employee(SSN),
  category INT NOT NULL,
  email VARCHAR(255) NOT NULL,
  street_number INT NOT NULL,
@@ -33,8 +32,8 @@ CREATE TABLE Hotel (
  country VARCHAR(255) NOT NULL,
  zip VARCHAR(255) NOT NULL,
  CONSTRAINT street_number check (street_number >= 0),
- CONSTRAINT category check (category >= 1),
- CONSTRAINT category check (category <= 5)
+ CONSTRAINT categoryabove check (category >= 1),
+ CONSTRAINT categorybelow check (category <= 5)
 );
 
 CREATE TABLE HotelPhoneNumber(
@@ -77,6 +76,23 @@ CREATE TABLE Employee (
  zip VARCHAR(255) NOT NULL,
  password VARCHAR(255) NOT NULL,
  constraint street_number check (street_number >= 0),
- constraint num_hotels check (num_hotels >= 0)
+ constraint password check (char_length(password) >= 5)
 );
 
+CREATE TABLE Manages(
+ SSN INT REFERENCES Employee(SSN),
+ hotel_id INT REFERENCES Hotel(hotel_id)
+);
+
+
+CREATE TABLE Role(
+ role_id SERIAL PRIMARY KEY,
+ name VARCHAR(255) NOT NULL,
+ description VARCHAR(255)
+);
+
+CREATE TABLE EmployeeRole(
+ employee_id INT REFERENCES Employee(SSN),
+ role_id INT REFERENCES Role(role_id)
+ PRIMARY KEY(employee_id, role_id)
+)
