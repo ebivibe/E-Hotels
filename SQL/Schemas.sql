@@ -75,7 +75,7 @@ CREATE TABLE Employee (
  country VARCHAR(255) NOT NULL,
  zip VARCHAR(255) NOT NULL,
  password VARCHAR(255) NOT NULL,
- CONSTRAINT street_number CHECK (street_number >= 0),
+ CONSTRAINT street_number CHECK (street_number > 0),
  CONSTRAINT password CHECK (char_length(password) >= 5)
 );
 
@@ -92,11 +92,51 @@ CREATE TABLE Role(
 );
 
 CREATE TABLE EmployeeRole(
- employee_id INT REFERENCES Employee(SSN),
+ employee_ssn INT REFERENCES Employee(SSN),
  role_id INT REFERENCES Role(role_id)
  PRIMARY KEY(employee_id, role_id)
 );
 
+CREATE TABLE Customer(
+    SSN INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    street_number INT NOT NULL,
+    street_name VARCHAR(255) NOT NULL,
+    unit VARCHAR(255),
+    city VARCHAR(255) NOT NULL,
+    province VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL,
+    zip VARCHAR(255) NOT NULL,
+    registration_date TIMESTAMP NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    CONSTRAINT street_number CHECK (street_number > 0),
+     CONSTRAINT password CHECK (char_length(password) >= 5)
+);
+
+CREATE TABLE BookingRental(
+    booking_id SERIAL PRIMARY KEY,
+    reservation_date TIMESTAMP NOT NULL,
+    check_in_date TIMESTAMP NOT NULL,
+    check_out_date TIMESTAMP NOT NULL,
+    checked_in BOOLEAN NOT NULL,
+    room_id INT REFERENCES Room(room_id),
+    customer_ssn INT REFERENCES Customer(SSN),
+    employee_ssn INT REFERENCES Employee(SSN),
+    CONSTRAINT booking_id CHECK (booking_id > 0)
+);
+
+CREATE TABLE Payment(
+    payment_id SERIAL PRIMARY KEY,
+    booking_id INT REFERENCES BookingRental(booking_id),
+    card_number INT NOT NULL,
+    expiry_month INT NOT NULL,
+    expiry_year INT NOT NULL,
+    cvc INT NOT NULL,
+    amount INT NOT NULL,
+    CONSTRAINT cvc CHECK (cvc > 0),
+    CONSTRAINT amount CHECK (amount > 0),
+    CONSTRAINT card_number CHECK (card_number > 0)
+);
 
 CREATE TABLE Archive (
     archive_id SERIAL PRIMARY KEY,
