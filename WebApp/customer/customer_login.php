@@ -4,6 +4,7 @@
 <head>
 <?php
 include("../helpers/imports.php");
+include("../helpers/common.php");
 ?>
 </head>
 <body>
@@ -32,9 +33,19 @@ if(isset($_SESSION['user_id'] )){
 
 if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
-      $_SESSION['user_id'] = $_POST['username'];
+      $query = 'SELECT exists(Select * FROM public.Customer where SSN='.$_POST['username']." and password='".$_POST['password']."')";
+      $result = pg_query($query) ;
+    
+      
+      if(!$result){
+        echo "<script>alert('Login Failed');</script>";
+      } else{
+       // $row = pg_fetch_row($result)
+        $_SESSION['user_id'] = $_POST['username'];
+        header("Location: customer_main.php");
+      }
 
-      header("Location: customer_main.php");
+      
     }
 }
 ?>
