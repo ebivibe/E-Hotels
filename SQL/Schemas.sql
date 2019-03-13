@@ -116,7 +116,7 @@ CREATE TABLE Customer(
     province VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     zip VARCHAR(255) NOT NULL,
-    registration_date TIMESTAMP NOT NULL,
+    registration_date TIMESTAMP DEFAULT NOW() NOT NULL,
     password VARCHAR(255) NOT NULL,
     CONSTRAINT street_number CHECK (street_number > 0),
      CONSTRAINT password CHECK (char_length(password) >= 5)
