@@ -20,7 +20,8 @@ include("helpers/imports.php");
 <h1 class="title">E Hotel</h1>
 <div class="loginbuttons">
 <a class="btn btn-primary loginbutton" href="employee/employee_login.php" role="button">Employee Login</a>
-<a class="btn btn-primary" href="customer/customer_login.php" role="button">Customer Login</a>
+<a class="btn btn-primary loginbutton" href="customer/customer_login.php" role="button">Customer Login</a>
+<a class="btn btn-primary" href="admin/admin_login.php" role="button">Admin Login</a>
 </div>
 </center>
 

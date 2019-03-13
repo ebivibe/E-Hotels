@@ -10,7 +10,7 @@ include("../helpers/imports.php");
 
 
 <center>
-<h1 class="title">E Hotel Customer Login</h1>
+<h1 class="title">E Hotel Admin Login</h1>
 
 
 <form action="" method="post" class='loginform'>
@@ -32,9 +32,11 @@ if(isset($_SESSION['user_id'] )){
 
 if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
-      $_SESSION['user_id'] = $_POST['username'];
-
-      header("Location: customer_main.php");
+        if ($_POST['username'] === "admin" && $_POST['password']==="admin"){
+            $_SESSION['user_id'] = $_POST['username'];
+            header("Location: admin_main.php");
+        }
+      
     }
 }
 ?>
