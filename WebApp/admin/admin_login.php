@@ -36,6 +36,9 @@ if ( ! empty( $_POST ) ) {
             $_SESSION['user_id'] = $_POST['username'];
             header("Location: admin_main.php");
         }
+        else{
+            echo "<script>alert('Login Failed');</script>";
+        }
       
     }
 }
