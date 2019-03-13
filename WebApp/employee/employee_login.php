@@ -4,6 +4,7 @@
 <head>
 <?php
 include("../helpers/imports.php");
+include("../helpers/common.php");
 ?>
 </head>
 <body>
