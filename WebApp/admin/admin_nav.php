@@ -12,7 +12,7 @@
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="admin_employees.php">Employees</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="#">Hotel Chains</a>
+      <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="admin_chains.php">Hotel Chains</a>
     </li>
   </ul>
 
