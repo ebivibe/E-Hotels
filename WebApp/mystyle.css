@@ -1,0 +1,23 @@
+.title{
+    margin-top: 50px;
+}
+.nav-link{
+    color: white;
+}
+.loginform{
+    margin-top: 30px;
+    width: 50%;
+}
+.input{
+    height: 45px;
+}
+.loginbuttons{
+    margin-top: 50px;
+}
+.loginbutton{
+    margin-right: 20px;
+
+}
+.logoutbutton{
+    margin-top: 50px;
+}
