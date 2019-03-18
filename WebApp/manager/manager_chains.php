@@ -16,7 +16,8 @@ include("manager_nav.php")
 ?>
 
 <center class="customers">
-<table class="table">
+<a class="btn btn-primary" href="hotelchain/hotelchain_add.php" role="button">Add Hotel Chain</a>
+<table class="table" style="margin-top:10px;">
   <thead>
     <tr>
       <th scope="col">Chain ID</th>
@@ -46,6 +47,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     foreach ($line as $key => $col_value) {
         echo "\t\t<td>$col_value</td>\n";
     }
+    echo"<td><form action=\"hotelchain/hotelchain_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["chain_id"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
     echo "\t</tr>\n";
 }
 

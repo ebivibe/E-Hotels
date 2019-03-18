@@ -1,6 +1,6 @@
 
 <?php
-require_once("../helpers/login_check.php");
+require_once("../../helpers/login_check.php");
 ?>
 
 
@@ -9,8 +9,8 @@ require_once("../helpers/login_check.php");
 <head>
 <?php
 
-include("../helpers/imports.php");
-include("../helpers/common.php");
+include("../../helpers/imports.php");
+include("../../helpers/common.php");
 ?>
 </head>
 <body>
@@ -37,7 +37,7 @@ if ( ! empty( $_POST ) ) {
              </div>
              <div class=\"form-group\">
              <label for=\"email\">Street Number:</label>
-              <input type=\"text\" class=\"form-control\" name=\"streetnumber\" placeholder=\"Street Number\" value=".$row[2]." required>
+              <input type=\"number\" class=\"form-control\" name=\"streetnumber\" placeholder=\"Street Number\" value=".$row[2]." required>
             </div>
             <div class=\"form-group\">
             <label for=\"email\">Street Name:</label>
@@ -45,7 +45,7 @@ if ( ! empty( $_POST ) ) {
             </div>
             <div class=\"form-group\">
             <label for=\"email\">Unit:</label>
-              <input type=\"text\" class=\"form-control\" name=\"unit\" placeholder=\"Unit\" value=".$row[4]." required>
+              <input type=\"text\" class=\"form-control\" name=\"unit\" placeholder=\"Unit\" value=".$row[4]." >
              </div>
              <div class=\"form-group\">
              <label for=\"email\">City:</label>
@@ -89,10 +89,10 @@ if ( ! empty( $_POST ) ) {
            
       if(!$result){
         echo "<script>alert('Edit Failed');</script>";
-        header("Location: manager_customers.php");
+        header("Location: ../manager_customers.php");
       } else{
         echo "<script>alert('Edit Success');</script>";
-        header("Location: manager_customers.php");
+        header("Location: ../manager_customers.php");
       }
     }
 }

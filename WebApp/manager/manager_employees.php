@@ -16,7 +16,8 @@ include("manager_nav.php")
 ?>
 
 <center class="customers">
-<table class="table">
+<a class="btn btn-primary" href="employee/employee_add.php" role="button">Add Employee</a>
+<table class="table" style="margin-top:10px;">
   <thead>
     <tr>
       <th scope="col">SSN</th>
@@ -47,6 +48,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
         echo "\t\t<td>$col_value</td>\n";
     }
   
+    echo"<td><form action=\"employee/employee_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["ssn"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
     echo "\t</tr>\n";
 }
 

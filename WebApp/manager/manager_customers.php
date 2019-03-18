@@ -17,7 +17,7 @@ include("manager_nav.php")
 
 
 <center class="customers">
-<a class="btn btn-primary" href="customer_add.php" role="button">Add Employee</a>
+<a class="btn btn-primary" href="customer/customer_add.php" role="button">Add Customer</a>
 <table class="table" style="margin-top:10px;">
   <thead>
     <tr>
@@ -48,7 +48,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     foreach ($line as $key => $col_value) {
         echo "\t\t<td>$col_value</td>\n";
     }
-    echo"<td><form action=\"customer_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["ssn"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
+    echo"<td><form action=\"customer/customer_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["ssn"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
     echo "\t</tr>\n";
 }
 

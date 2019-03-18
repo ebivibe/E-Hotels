@@ -1,6 +1,6 @@
 
 <?php
-require_once("../helpers/login_check.php");
+require_once("../../helpers/login_check.php");
 ?>
 
 
@@ -9,8 +9,8 @@ require_once("../helpers/login_check.php");
 <head>
 <?php
 
-include("../helpers/imports.php");
-include("../helpers/common.php");
+include("../../helpers/imports.php");
+include("../../helpers/common.php");
 ?>
 </head>
 <body>
@@ -21,7 +21,7 @@ include("../helpers/common.php");
 <form action="" method="post" class="loginform" >
         <div class="form-group">
             <label for="ssn">SSN:</label>
-            <input type="text" class="form-control" name="ssn" placeholder="SSN" required>
+            <input type="number" class="form-control" name="ssn" placeholder="SSN" required>
             </div>
             <div class="form-group">
             <label for="name">Name:</label>
@@ -29,7 +29,7 @@ include("../helpers/common.php");
              </div>
              <div class="form-group">
              <label for="email">Street Number:</label>
-              <input type="text" class="form-control" name="streetnumber" placeholder="Street Number" required>
+              <input type="number" class="form-control" name="streetnumber" placeholder="Street Number" required>
             </div>
             <div class="form-group">
             <label for="email">Street Name:</label>
@@ -37,7 +37,7 @@ include("../helpers/common.php");
             </div>
             <div class="form-group">
             <label for="email">Unit:</label>
-              <input type="text" class="form-control" name="unit" placeholder="Unit" required>
+              <input type="text" class="form-control" name="unit" placeholder="Unit" >
              </div>
              <div class="form-group">
              <label for="email">City:</label>
@@ -78,10 +78,10 @@ if ( ! empty( $_POST ) ) {
            
       if(!$result){
         echo "<script>alert('Edit Failed');</script>";
-        header("Location: manager_customers.php");
+        header("Location: ../manager_customers.php");
       } else{
         echo "<script>alert('Edit Success');</script>";
-        header("Location: manager_customers.php");
+        header("Location: ../manager_customers.php");
       }
     }
 }
