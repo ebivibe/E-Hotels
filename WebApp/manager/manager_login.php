@@ -10,7 +10,7 @@ include("../helpers/imports.php");
 
 
 <center>
-<h1 class="title">E Hotel Admin Login</h1>
+<h1 class="title">E Hotel Manager Login</h1>
 
 
 <form action="" method="post" class='loginform'>
@@ -34,7 +34,7 @@ if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
         if ($_POST['username'] === "admin" && $_POST['password']==="admin"){
             $_SESSION['user_id'] = $_POST['username'];
-            header("Location: admin_main.php");
+            header("Location: manager_main.php");
         }
         else{
             echo "<script>alert('Login Failed');</script>";

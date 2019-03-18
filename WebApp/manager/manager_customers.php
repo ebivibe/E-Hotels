@@ -12,7 +12,7 @@ include("../helpers/common.php");
 </head>
 <body>
 <?php
-include("admin_nav.php")
+include("manager_nav.php")
 ?>
 
 <center class="customers">
@@ -21,7 +21,6 @@ include("admin_nav.php")
     <tr>
       <th scope="col">SSN</th>
       <th scope="col">Name</th>
-      <th scope="col">Hotel ID</th>
       <th scope="col">Street #</th>
       <th scope="col">Street Name</th>
       <th scope="col">Unit </th>
@@ -29,6 +28,7 @@ include("admin_nav.php")
       <th scope="col">Province</th>
       <th scope="col">Country</th>
       <th scope="col">Zip</th>
+      <th scope="col">Registration Date</th>
       <th scope="col">Password</th>
     </tr>
   </thead>
@@ -38,7 +38,7 @@ include("admin_nav.php")
 <?php
 
 
-$query = 'SELECT * FROM public.Employee';
+$query = 'SELECT * FROM public.Customer order by SSN';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -46,12 +46,14 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     foreach ($line as $key => $col_value) {
         echo "\t\t<td>$col_value</td>\n";
     }
-  
+    echo"<td><form action=\"customer_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["ssn"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
     echo "\t</tr>\n";
 }
 
 
 ?>
+
+
   </tbody>
 </table>
 </center>

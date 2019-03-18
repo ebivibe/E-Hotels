@@ -26,9 +26,10 @@ if ( ! empty( $_POST ) ) {
         $query = 'Select * FROM public.Customer where SSN='.$_POST['id'];
         $result = pg_query($query) ;
         $row = pg_fetch_row($result);
-            echo "<form action=\"\" method=\"post\" class=\"loginform\" ><div class=\"form-group\">
+            echo "<form action=\"customer_edit_request.php\" method=\"post\" class=\"loginform\" >
+            <div class=\"form-group\">
             <label for=\"ssn\">SSN:</label>
-              <input type=\"text\" class=\"form-control\" name=\"ssn\" placeholder=\"Name\" value=".$row[0]." required disabled>
+            <input type=\"text\" class=\"form-control\" name=\"ssn\" placeholder=\"SSN\" value=".$row[0]." required readonly>
              </div>
             <div class=\"form-group\">
             <label for=\"name\">Name:</label>
@@ -64,7 +65,7 @@ if ( ! empty( $_POST ) ) {
            </div>
            <div class=\"form-group\">
            <label for=\"email\">Registration Date:</label>
-           <input type=\"text\" class=\"form-control\" name=\"registrationdate\" placeholder=\"Registration Date\" value=".$row[9]." required>
+           <input type=\"text\" class=\"form-control\" name=\"registrationdate\" placeholder=\"Registration Date\" value=".$row[9]." required readonly>
            </div>
            <div class=\"form-group\">
            <label for=\"email\">Password:</label>
@@ -72,21 +73,13 @@ if ( ! empty( $_POST ) ) {
           </div>
             <button type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">Submit</button>
           </form>";
-          
+
     }
 }
 
 ?>
 </center>
-<?php
-if ( ! empty( $_POST ) ) {
-    if ( isset( $_POST['username'] ) && isset( $_POST['password'] )&&  isset( $_POST['id'] ) ) {
-            echo"<script>alert('IT WORKED');</script>";
-    }
-}
 
-
-?>
 
 
 </body>

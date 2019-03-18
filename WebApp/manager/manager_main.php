@@ -11,7 +11,7 @@ include("../helpers/imports.php");
 </head>
 <body>
 <?php
-include("admin_nav.php")
+include("manager_nav.php")
 ?>
 
 <center>
