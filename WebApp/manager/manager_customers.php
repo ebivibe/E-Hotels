@@ -15,8 +15,10 @@ include("../helpers/common.php");
 include("manager_nav.php")
 ?>
 
+
 <center class="customers">
-<table class="table">
+<a class="btn btn-primary" href="customer_add.php" role="button">Add Employee</a>
+<table class="table" style="margin-top:10px;">
   <thead>
     <tr>
       <th scope="col">SSN</th>

@@ -10,7 +10,7 @@ include("../helpers/imports.php");
 
 
 <center>
-<h1 class="title">E Hotel Manager Login</h1>
+<h1 class="title">E Hotel Admin Login</h1>
 
 
 <form action="" method="post" class='loginform'>
@@ -42,6 +42,24 @@ if ( ! empty( $_POST ) ) {
       
     }
 }
+/*
+if ( ! empty( $_POST ) ) {
+  if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
+    $query = 'SELECT exists(Select * FROM public.Employee where SSN='.$_POST['username'].' and password=\''.$_POST['password'].'\') and exists(Select * FROM public.Manages where SSN='.$_POST['username'].') ';
+    $result = pg_query($query) ;
+  
+    
+    if(!$result){
+      echo "<script>alert('Login Failed');</script>";
+    } else{
+     // $row = pg_fetch_row($result)
+      $_SESSION['user_id'] = $_POST['username'];
+      header("Location: customer_main.php");
+    }
+ 
+  }
+}
+*/
 ?>
 
 

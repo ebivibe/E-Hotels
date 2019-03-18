@@ -161,7 +161,7 @@ CREATE TABLE Archive (
     hotel_zip VARCHAR(255) NOT NULL,
     hotel_country VARCHAR(255) NOT NULL,
     check_in_date TIMESTAMP NOT NULL,
-    hotel_chain VARCHAR(255) NOT NULL,
+    hotel_chain_name VARCHAR(255) NOT NULL,
     reservation_date TIMESTAMP,
     check_out_date TIMESTAMP NOT NULL,
     customer_ssn INT NOT NULL,
