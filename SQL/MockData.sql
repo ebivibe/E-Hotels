@@ -1,0 +1,3 @@
+insert into employee(ssn, name, hotel_id, street_number, city, province, country, zip, password) values (565, 'Steve', 1, 1235, 'Ottawa', 'Ontario', 'Canada', 'K1S5J6', 'BobIsAName');
+insert into customer(ssn, name, street_number, street_name, city, province, country, zip, password) values (555, 'Joe', 12345, 'Avenue Street', 'Ottawa', 'Ontario', 'Canada', 'k1S5J6', 'SteveIsAName');
+insert into room(room_number, hotel_id, price, capacity, sea_view, mountain_view, damages, can_be_extended) values (132, 1, 17.95, 2, true, true, false, false);
