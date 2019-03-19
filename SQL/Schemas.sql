@@ -25,7 +25,7 @@ CREATE TABLE ChainPhoneNumber(
 DROP TABLE IF EXISTS Hotel CASCADE;
 CREATE TABLE Hotel (
  hotel_id SERIAL PRIMARY KEY,
- chain_id INTEGER REFERENCES HotelChain(chain_id) ON DELETE RESTRICT
+ chain_id INTEGER REFERENCES HotelChain(chain_id) ON DELETE RESTRICT,
  category INT NOT NULL,
  email VARCHAR(255) NOT NULL,
  street_number INT NOT NULL,
@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS Employee CASCADE;
 CREATE TABLE Employee (
  SSN INT PRIMARY KEY,
  name VARCHAR (255) NOT NULL,
- hotel_id INT REFERENCES Hotel(hotel_id) ON DELETE RESTRICT
+ hotel_id INT REFERENCES Hotel(hotel_id) ON DELETE RESTRICT,
  street_number INT NOT NULL,
  street_name VARCHAR(255) NOT NULL,
  unit VARCHAR(255),
