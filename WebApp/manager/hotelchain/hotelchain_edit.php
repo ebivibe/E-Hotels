@@ -17,7 +17,7 @@ include("../../helpers/common.php");
 
 
 <center>
-<h1 class="title">Customer Edit</h1>
+<h1 class="title">Hotel Chain Edit</h1>
 <?php
 
 if ( ! empty( $_POST ) ) {

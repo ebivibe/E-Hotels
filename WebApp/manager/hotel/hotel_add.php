@@ -20,8 +20,13 @@ include("../../helpers/common.php");
 <h1 class="title">Hotel Add</h1>
 <form action="" method="post" class="loginform" >
             <div class="form-group">
-            <label for="chain_id">Chain Id:</label>
-              <input type="number" class="form-control" name="chain_id" placeholder="Chain Id" required>
+            <?php
+            if ( ! empty( $_POST ) ) {
+                if ( isset( $_POST["id2"] ) ) { 
+                  echo '<input type="number" class="form-control" name="chain_id"  value="'.$_POST["id2"].'" placeholder="Chain Id" hidden>';
+                }
+            }   
+            ?>
              </div>
              <div class="form-group">
             <label for="chain_id">Category:</label>
@@ -78,10 +83,10 @@ if ( ! empty( $_POST ) ) {
            
       if(!$result){
         echo "<script>alert('Edit Failed');</script>";
-        header("Location: ../manager_hotels.php");
+        header("Location: ../manager_chains.php");
       } else{
         echo "<script>alert('Edit Success');</script>";
-        header("Location: ../manager_hotels.php");
+        header("Location: ../manager_chains.php");
       }
     }
 }

@@ -31,6 +31,7 @@ include("manager_nav.php")
       <th scope="col">Country</th>
       <th scope="col">Zip</th>
       <th scope="col">Password</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>

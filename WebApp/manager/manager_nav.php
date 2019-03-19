@@ -14,9 +14,6 @@
     <li class="nav-item">
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="manager_chains.php">Hotel Chains</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="manager_hotels.php">Hotels</a>
-    </li>
   </ul>
 
 </nav>

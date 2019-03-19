@@ -1,22 +1,18 @@
 <?php
-require_once("../helpers/login_check.php");
+require_once("../../helpers/login_check.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 <?php
-include("../helpers/imports.php");
-include("../helpers/common.php");
+include("../../helpers/imports.php");
+include("../../helpers/common.php");
 ?>
 </head>
 <body>
-<?php
-include("manager_nav.php")
-?>
-
 <center class="customers">
-<a class="btn btn-primary" href="hotel/hotel_add.php" role="button">Add Hotel</a>
+  <h1> Hotels </h1>
 <table class="table" style="margin-top:10px;">
   <thead>
     <tr>
@@ -31,15 +27,24 @@ include("manager_nav.php")
       <th scope="col">Province</th>
       <th scope="col">Country</th>
       <th scope="col">Zip</th>
-    </tr>
-  </thead>
-  <tbody>
 
 
 <?php
 
+if ( ! empty( $_POST ) ) {
+  if ( isset( $_POST["id"] ) ) { 
+    echo 
+    '<th scope="col">
+    <form action="hotel_add.php" method="post">
+    <input type="hidden" name="id2" value="'.$_POST["id"].'"/>
+    <input class="btn btn-primary" type="submit" name="submit-btn" value="Add" />
+    </form>
+    </th>
+    </tr>
+    </thead>
+    <tbody>';
 
-$query = 'SELECT * FROM public.Hotel order by hotel_id';
+$query = 'SELECT * FROM public.Hotel where chain_id='.$_POST["id"].'order by hotel_id';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -47,8 +52,14 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     foreach ($line as $key => $col_value) {
         echo "\t\t<td>$col_value</td>\n";
     }
-    echo"<td><form action=\"hotel/hotel_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["hotel_id"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
+    echo"<td>
+    <form action=\"hotel_edit.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"".$line["hotel_id"]."\"/>
+    <input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
+    </form></td>";
     echo "\t</tr>\n";
+  }
+  }
 }
 
 ?>

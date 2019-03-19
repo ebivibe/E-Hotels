@@ -32,6 +32,7 @@ include("manager_nav.php")
       <th scope="col">Zip</th>
       <th scope="col">Registration Date</th>
       <th scope="col">Password</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>

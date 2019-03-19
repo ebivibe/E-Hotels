@@ -31,6 +31,7 @@ include("manager_nav.php")
       <th scope="col">Province</th>
       <th scope="col">Country</th>
       <th scope="col">Zip</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -47,7 +48,25 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     foreach ($line as $key => $col_value) {
         echo "\t\t<td>$col_value</td>\n";
     }
-    echo"<td><form action=\"hotelchain/hotelchain_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"".$line["chain_id"]."\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
+    echo "<td>
+    <div class=\"dropdown\">
+    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+      Options
+    </button>
+    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+    <form action=\"hotelchain/hotelchain_edit.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"".$line["chain_id"]."\"/>
+    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
+    </form>
+    <form action=\"hotel/hotels_view.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"".$line["chain_id"]."\"/>
+    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View\" />
+    </form>
+    </div>
+    </div>
+    
+
+    </td>";
     echo "\t</tr>\n";
 }
 

@@ -89,10 +89,10 @@ if ( ! empty( $_POST ) ) {
            
       if(!$result){
         echo "<script>alert('Edit Failed');</script>";
-        header("Location: ../manager_hotels.php");
+        header("Location: ../manager_chains.php");
       } else{
         echo "<script>alert('Edit Success');</script>";
-        header("Location: ../manager_hotels.php");
+        header("Location: ../manager_chains.php");
       }
     }
 }
