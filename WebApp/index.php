@@ -18,10 +18,30 @@ include("helpers/imports.php");
 
 <center>
 <h1 class="title">E Hotel</h1>
-<div class="loginbuttons">
-<a class="btn btn-primary loginbutton" href="employee/employee_login.php" role="button">Employee Login</a>
-<a class="btn btn-primary loginbutton" href="customer/customer_login.php" role="button">Customer Login</a>
-<a class="btn btn-primary" href="manager/manager_login.php" role="button">Manager Login</a>
+<div class="container">
+<div class="loginbuttons row">
+<div class="card" style="width: 18rem; margin-right: 20px;  margin-left: 100px;">
+  <div class="card-body">
+    <h5 class="card-title">Employee</h5>
+    <a class="btn btn-primary loginbutton" href="employee/employee_login.php" role="button">Login</a>
+    <a class="btn btn-primary loginbutton" href="" role="button"> Sign Up</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem; margin-right: 20px;">
+  <div class="card-body">
+    <h5 class="card-title">Customer</h5>
+    <a class="btn btn-primary loginbutton" href="customer/customer_login.php" role="button">Login</a>
+    <a class="btn btn-primary loginbutton" href="" role="button"> Sign Up</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem; margin-right: 20px;">
+  <div class="card-body">
+    <h5 class="card-title">Manager</h5>
+    <a class="btn btn-primary loginbutton" href="manager/manager_login.php" role="button">Login</a>
+    <a class="btn btn-primary loginbutton" href="" role="button"> Sign Up</a>
+  </div>
+</div>
+</div>
 </div>
 </center>
 
