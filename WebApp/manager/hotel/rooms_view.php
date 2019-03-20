@@ -14,21 +14,19 @@ require_once("../../helpers/login_check.php");
 
 <body>
     <center class="customers">
-        <h1> Hotels </h1>
+        <h1> Rooms </h1>
         <table class="table" style="margin-top:10px;">
             <thead>
                 <tr>
-                    <th scope="col">Chain ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Street #</th>
-                    <th scope="col">Street Name</th>
-                    <th scope="col">Unit </th>
-                    <th scope="col">City </th>
-                    <th scope="col">Province</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Zip</th>
+                    <th scope="col">Room ID</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Hotel Id</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Capacity</th>
+                    <th scope="col">Sea View</th>
+                    <th scope="col">Montain View </th>
+                    <th scope="col">Damages </th>
+                    <th scope="col">Can be extended</th>
 
 
                     <?php
@@ -37,7 +35,7 @@ require_once("../../helpers/login_check.php");
                       if (isset($_POST["id"])) {
                         echo
                           '<th scope="col">
-    <form action="hotel_add.php" method="post">
+    <form action="room_add.php" method="post">
     <input type="hidden" name="id" value="' . $_POST["id"] . '"/>
     <input class="btn btn-primary" type="submit" name="submit-btn" value="Add" />
     </form>
@@ -46,7 +44,7 @@ require_once("../../helpers/login_check.php");
     </thead>
     <tbody>';
 
-                        $query = 'SELECT * FROM public.Hotel where chain_id=' . $_POST["id"] . 'order by hotel_id';
+                        $query = 'SELECT * FROM public.Room where hotel_id=' . $_POST["id"] . 'order by room_id';
                         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
                         while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -60,18 +58,17 @@ require_once("../../helpers/login_check.php");
       Options
     </button>
     <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
-    <form action=\"hotel_edit.php\" method=\"post\">
-    <input type=\"hidden\" name=\"id\" value=\"" . $line["hotel_id"] . "\"/>
+    <form action=\"room_edit.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"" . $line["room_id"] . "\"/>
     <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
     </form>
-    <form action=\"rooms_view.php\" method=\"post\">
-    <input type=\"hidden\" name=\"id\" value=\"" . $line["hotel_id"] . "\"/>
-    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Rooms\" />
+    <form action=\"amenities_view.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"" . $line["room_id"] . "\"/>
+    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Amenities\" />
     </form>
-    
     <form action=\"\" method=\"post\">
-      <input type=\"hidden\" name=\"delete_id\" value=\"" . $line["hotel_id"] . "\"/>
-      <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Hotel\" />
+      <input type=\"hidden\" name=\"delete_id\" value=\"" . $line["room_id"] . "\"/>
+      <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Room\" />
     </form>
     </div>
     </div>
@@ -87,11 +84,12 @@ require_once("../../helpers/login_check.php");
                     </tbody>
         </table>
     </center>
-
     <?php
+
+
     if (!empty($_POST)) {
       if (isset($_POST["delete_id"])) {
-        $query = 'delete from public.Hotel where hotel_id=' . $_POST["delete_id"];
+        $query = 'delete from public.Room where room_id=' . $_POST["delete_id"];
         $result = pg_query($query);
         print_r($query);
 
@@ -105,6 +103,7 @@ require_once("../../helpers/login_check.php");
       }
     }
     ?>
+
 
 </body>
 
