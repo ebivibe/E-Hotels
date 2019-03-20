@@ -13,6 +13,10 @@ require_once("../../helpers/login_check.php");
 </head>
 
 <body>
+
+    <?php
+    include("hotel_nav.php")
+    ?>
     <center class="customers">
         <h1> Rooms </h1>
         <table class="table" style="margin-top:10px;">
