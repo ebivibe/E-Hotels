@@ -49,7 +49,7 @@ include("helpers/imports.php");
 
 <?php
 /*
-$dbconn2 = pg_connect("host=localhost port=5432 user=postgres password=Orange2349");
+$dbconn2 = pg_connect("host=localhost port=5432 user=postgres password=password here");
 
 $query = 'SELECT * FROM lab.artist';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
