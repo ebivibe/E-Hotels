@@ -6,6 +6,9 @@
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="manager_main.php">Home</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="manager_bookings.php">Bookings</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px"href="manager_customers.php">Customers</a>
     </li>
     <li class="nav-item">

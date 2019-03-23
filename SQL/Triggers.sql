@@ -1,6 +1,6 @@
 CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
 	BEGIN INSERT INTO Archive(room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
-        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn)
+        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in)
             SELECT R.room_number, 
                 H.street_number,
                 H.street_name,
@@ -14,7 +14,8 @@ CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
                 B.reservation_date,
                 B.check_out_date,
                 B.customer_ssn,
-                B.employee_ssn
+                B.employee_ssn,
+                B.checked_in
             FROM Room R, 
                 Hotel H, 
                 HotelChain HC, 

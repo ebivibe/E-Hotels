@@ -17,3 +17,5 @@ insert into room(room_number, hotel_id, price, capacity, sea_view, mountain_view
     132, 1, 17.95, 2, true, true, false, false
 );
 
+insert into bookingrental(reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn, employee_ssn)
+	values (now(), now(), now(), false, 1, 555, 1231);
