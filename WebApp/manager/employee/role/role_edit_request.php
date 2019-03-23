@@ -31,7 +31,7 @@ require_once("../../../helpers/login_check.php");
           header("Location: ../../manager_employees.php");
         } else {
           echo "<script>alert('Edit Success');</script>";
-          header("Location: ../../manager_employees/.php");
+          header("Location: ../../manager_employees.php");
         }
       }
     }
