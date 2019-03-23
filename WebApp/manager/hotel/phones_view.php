@@ -13,26 +13,19 @@ require_once("../../helpers/login_check.php");
 </head>
 
 <body>
-
-    <?php
+<?php
     include("hotel_nav.php")
+?>
+
+<?php
     ?>
     <center class="customers">
-        <h1> Hotels </h1>
-        <table class="table" style="margin-top:10px;">
+        <h1> Phone Numbers</h1>
+        <table class="table" style="margin-top:10px; margin-left: 50px; margin-right: 100px;">
             <thead>
                 <tr>
-                    <th scope="col">Chain ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Street #</th>
-                    <th scope="col">Street Name</th>
-                    <th scope="col">Unit </th>
-                    <th scope="col">City </th>
-                    <th scope="col">Province</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Zip</th>
+                    <th scope="col">Hotel ID</th>
+                    <th scope="col">Phone Number</th>
 
 
                     <?php
@@ -41,7 +34,7 @@ require_once("../../helpers/login_check.php");
                       if (isset($_POST["id"])) {
                         echo
                           '<th scope="col">
-    <form action="hotel_add.php" method="post">
+    <form action="phone_add.php" method="post">
     <input type="hidden" name="id" value="' . $_POST["id"] . '"/>
     <input class="btn btn-primary" type="submit" name="submit-btn" value="Add" />
     </form>
@@ -50,7 +43,7 @@ require_once("../../helpers/login_check.php");
     </thead>
     <tbody>';
 
-                        $query = 'SELECT * FROM public.Hotel where chain_id=' . $_POST["id"] . 'order by hotel_id';
+                        $query = 'SELECT * FROM public.HotelPhoneNumber where hotel_id=' . $_POST["id"] . 'order by hotel_id';
                         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
                         while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -64,22 +57,15 @@ require_once("../../helpers/login_check.php");
       Options
     </button>
     <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
-    <form action=\"hotel_edit.php\" method=\"post\">
+    <form action=\"phone_edit.php\" method=\"post\">
     <input type=\"hidden\" name=\"id\" value=\"" . $line["hotel_id"] . "\"/>
+    <input type=\"hidden\" name=\"number\" value=\"" . $line["phone_number"] . "\"/>
     <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
     </form>
-    <form action=\"rooms_view.php\" method=\"post\">
-    <input type=\"hidden\" name=\"id\" value=\"" . $line["hotel_id"] . "\"/>
-    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Rooms\" />
-    </form>
-    <form action=\"phones_view.php\" method=\"post\">
-    <input type=\"hidden\" name=\"id\" value=\"" . $line["hotel_id"] . "\"/>
-    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Phones\" />
-    </form>
-    
     <form action=\"\" method=\"post\">
-      <input type=\"hidden\" name=\"delete_id\" value=\"" . $line["hotel_id"] . "\"/>
-      <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Hotel\" />
+      <input type=\"hidden\" name=\"hotel_id\" value=\"" . $line["hotel_id"] . "\"/>
+      <input type=\"hidden\" name=\"number\" value=\"" . $line["phone_number"] . "\"/>
+      <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Phone Number\" />
     </form>
     </div>
     </div>
@@ -95,13 +81,15 @@ require_once("../../helpers/login_check.php");
                     </tbody>
         </table>
     </center>
-
     <?php
+
+
     if (!empty($_POST)) {
-      if (isset($_POST["delete_id"])) {
-        $query = 'delete from public.Hotel where hotel_id=' . $_POST["delete_id"];
+      if (isset($_POST["hotel_id"])) {
+        $query = 'delete from public.HotelPhoneNumber where hotel_id=' . $_POST["hotel_id"] . ' and phone_number=\'' . $_POST["number"].'\'';
         $result = pg_query($query);
         print_r($query);
+       // exit;
 
         if (!$result) {
           echo "<script>alert('Edit Failed');</script>";
@@ -113,6 +101,7 @@ require_once("../../helpers/login_check.php");
       }
     }
     ?>
+
 
 </body>
 

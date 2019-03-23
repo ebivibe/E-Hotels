@@ -13,12 +13,14 @@ require_once("../../helpers/login_check.php");
 </head>
 
 <body>
-
+<?php
+    include("hotel_nav.php")
+?>
 
 <?php
     ?>
     <center class="customers">
-        <h1> Phone Number </h1>
+        <h1> Phone Numbers </h1>
         <table class="table" style="margin-top:10px; margin-left: 50px; margin-right: 100px;">
             <thead>
                 <tr>
