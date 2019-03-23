@@ -52,7 +52,20 @@ require_once("../helpers/login_check.php");
                     echo "\t\t<td>$col_value</td>\n";
                   }
 
-                  echo "<td><form action=\"employee/employee_edit.php\" method=\"post\"><input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/><input class=\"btn btn-primary\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" /></form></td>";
+                  echo "<td><div class=\"dropdown\">
+                  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    Options
+                  </button>
+                  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                  <form action=\"employee/employee_edit.php\" method=\"post\">
+                  <input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/>
+                  <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
+                  </form>
+                  <form action=\"employee/employee_roles.php\" method=\"post\">
+                  <input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/>
+                  <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Roles\" />
+                  </form>
+                  </div><td>";
                   echo "\t</tr>\n";
                 }
 
