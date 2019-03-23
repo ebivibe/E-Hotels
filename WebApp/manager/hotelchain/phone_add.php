@@ -18,25 +18,22 @@ require_once("../../helpers/login_check.php");
 
 
     <center>
-        <h1 class="title">Amenity Add</h1>
+        <h1 class="title">Phone Add</h1>
         <form action="" method="post" class="loginform">
             <div class="form-group">
                 <?php
                 if (!empty($_POST)) {
                   if (isset($_POST["id"])) {
-                    echo '<input type="number" class="form-control" name="room_id"  value="' . $_POST["id"] . '" hidden >';
+                    echo '<input type="number" class="form-control" name="chain_id"  value="' . $_POST["id"] . '" hidden >';
                   }
                 }
                 ?>
             </div>
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" name="name" placeholder="Name" required>
+                <label for="name">Phone Number:</label>
+                <input type="text" class="form-control" name="phone_number" placeholder="Phone Number" required>
             </div>
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" placeholder="Description">
-            </div>
+            
 
             <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
             <a href="../manager_chains" class="btn btn-primary">Cancel</a>
@@ -48,9 +45,9 @@ require_once("../../helpers/login_check.php");
 
     <?php
     if (!empty($_POST)) {
-      if (isset($_POST["room_id"])) {
-        $query = 'insert into public.Amenity(room_id, name, description) values(
-         ' . $_POST['room_id'] . ', \'' . $_POST['name'] . '\', \'' . $_POST['description'] . '\' )';
+      if (isset($_POST["chain_id"]) && isset($_POST["phone_number"])) {
+        $query = 'insert into public.ChainPhoneNumber(chain_id, phone_number) values(
+         ' . $_POST['chain_id'] . ', \''. $_POST['phone_number']. '\')';
         $result = pg_query($query);
         print_r($query);
         //exit;

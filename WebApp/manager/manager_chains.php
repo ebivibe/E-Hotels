@@ -64,6 +64,10 @@ require_once("../helpers/login_check.php");
     <input type=\"hidden\" name=\"id\" value=\"" . $line["chain_id"] . "\"/>
     <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Hotels\" />
     </form>
+    <form action=\"hotelchain/phones_view.php\" method=\"post\">
+      <input type=\"hidden\" name=\"id\" value=\"" . $line["chain_id"] . "\"/>
+      <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Phones\" />
+    </form>
     <form action=\"hotelchain/hotelchain_delete.php\" method=\"post\">
       <input type=\"hidden\" name=\"delete_id\" value=\"" . $line["chain_id"] . "\"/>
       <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Chain\" />
