@@ -1,21 +1,16 @@
-f=open("Database.sql", "w+")
+w=open("Database.sql", "w+")
 
-schemas=open("Schemas.sql", "r")
-contents=schemas.read()
-f.write(contents)
+with open("Schemas.sql", "r") as f:
+        w.write(f.read())   
 
-triggers=open("Triggers.sql", "r")
-contents=triggers.read()
-f.write(contents)
+with open("Triggers.sql", "r") as f:
+        w.write(f.read())
+     
+with open("Views.sql", "r") as f:
+        w.write(f.read())
 
-views=open("Views.sql", "r")
-contents=views.read()
-f.write(contents)
-
-mockdata=open("MockData.sql", "r")
-contents=mockdata.read()
-f.write(contents)
-
+with open("MockData.sql", "r") as f:
+        w.write(f.read())
      
 
 
