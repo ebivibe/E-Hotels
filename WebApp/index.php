@@ -24,7 +24,7 @@ include("helpers/imports.php");
   <div class="card-body">
     <h5 class="card-title">Employee</h5>
     <a class="btn btn-primary loginbutton" href="employee/employee_login.php" role="button">Login</a>
-    <a class="btn btn-primary loginbutton" href="" role="button"> Sign Up</a>
+    <a class="btn btn-primary loginbutton" href="employee/sign_up.php" role="button"> Sign Up</a>
   </div>
 </div>
 <div class="card" style="width: 18rem; margin-right: 20px;">
@@ -38,7 +38,6 @@ include("helpers/imports.php");
   <div class="card-body">
     <h5 class="card-title">Manager</h5>
     <a class="btn btn-primary loginbutton" href="manager/manager_login.php" role="button">Login</a>
-    <a class="btn btn-primary loginbutton" href="" role="button"> Sign Up</a>
   </div>
 </div>
 </div>

@@ -43,7 +43,7 @@ if ( ! empty( $_POST ) ) {
     } else{
      // $row = pg_fetch_row($result)
       $_SESSION['user_id'] = $_POST['username'];
-      header("Location: customer_main.php");
+      header("Location: employee_main.php");
     }
 
     
