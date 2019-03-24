@@ -156,6 +156,7 @@ CREATE TABLE Payment(
 DROP TABLE IF EXISTS Archive CASCADE;
 CREATE TABLE Archive (
     archive_id SERIAL PRIMARY KEY,
+    booking_id INT NOT NULL,
     room_number INT NOT NULL,
     street_number INT NOT NULL,
     street_name VARCHAR(255) NOT NULL,
