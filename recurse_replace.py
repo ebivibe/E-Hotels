@@ -1,9 +1,9 @@
 import os, sys
 import argparse
 
-exclude = (".git", sys.argv[0], "git", ".gitignore")
 
-def find_all_files(file_queue, subdir):
+
+def find_all_files(file_queue, subdir, exclude):
     directories = []
     for item in os.scandir(subdir):
         if item.name in exclude:
@@ -14,10 +14,12 @@ def find_all_files(file_queue, subdir):
             file_queue.append(item.path)
     
     for directory in directories:
-        find_all_files(file_queue, directory)
+        find_all_files(file_queue, directory, exclude)
 
-def find_dir_files(file_queue):
+def find_dir_files(file_queue, exclude):
     for item in os.scandir():
+        if item.name in exclude:
+            continue
         if item.is_file():
             file_queue.append(item.path)
 
@@ -33,16 +35,37 @@ def apply_replace(path, old, new):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Runs operations on all files of a directory")
+    parser = argparse.ArgumentParser(description="Runs operations on all files of a directory. Lists all file paths in directory if no flags given")
     parser.add_argument('-r', '--recursive', help='Runs operation on all files of all subdirectories', action="store_true")
-    parser.add_argument('-l', '--list', help="List files with path", action="store_true")
     parser.add_argument('-c', '--change', help="Replace first argument with second argument", nargs=2, action="store")
-    parser.add_argument('-e', '--exclude', help="Files and directories to exclude from the search", narg=argparse.REMAINDER)
+    parser.add_argument('-e', '--exclude', help="Files and directories to exclude from the search", nargs=argparse.REMAINDER)
+    parser.add_argument('-ef', '--exclude-file', help="Accesses a file for all excluded items", nargs=1, action="store")
 
+    ## Always exclude this file from any operations
+    exclude = set()
+    exclude.add(sys.argv[0])
 
-    queue = []
-    find_all_files(queue, os.getcwd())
+    args = parser.parse_args()
+
+    items = []
+    if args.exclude != None:
+        for ex in args.exclude:
+            exclude.add(ex)
     
-    print("Replaced " + sys.argv[1] + " with " + sys.argv[2] + " on " + str(len(queue)) + " files")
+    if args.exclude_file != None:
+        with open(args.exclude_file, "r") as f:
+            for line in f:
+                exclude.add(line)
 
+    if args.recursive:
+        find_all_files(items, ".", exclude)
+    else:
+        find_dir_files(items, exclude)
+    
+    for item in items:
+        if args.change == None:
+            print(item)
+        else:
+            apply_replace(item, args.change[0], args.change[1])
+    
 
