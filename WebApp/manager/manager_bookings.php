@@ -28,6 +28,7 @@ require_once("../helpers/login_check.php");
                     <th scope="col">Checked In Date</th>
                     <th scope="col">Checked Out Date</th>
                     <th scope="col">Checked In</th>
+                    <th scope="col">Paid</th>
                     <th scope="col">Room ID</th>
                     <th scope="col">Customer SSN</th>
                     <th scope="col">Employee SSN</th>
