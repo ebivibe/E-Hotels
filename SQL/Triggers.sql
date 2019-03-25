@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
-	BEGIN INSERT INTO Archive(booking_id, room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
-        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in)
-            SELECT B.booking_id,
+	BEGIN INSERT INTO Archive(archive_id, room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
+        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in, paid)
+            SELECT B.booking_id as archive_id,
                 R.room_number, 
                 H.street_number,
                 H.street_name,
@@ -16,7 +16,8 @@ CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
                 B.check_out_date,
                 B.customer_ssn,
                 B.employee_ssn,
-                B.checked_in
+                B.checked_in,
+				B.paid
             FROM Room R, 
                 Hotel H, 
                 HotelChain HC, 
@@ -31,8 +32,23 @@ $archive$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION update_archive() RETURNS TRIGGER AS $update_archive$
     BEGIN UPDATE Archive
-        SET checked_in = NEW.checked_in
-        WHERE booking_id = NEW.booking_id;
+        SET checked_in = subquery.checked_in,
+            paid = subquery.paid,
+            employee_ssn = subquery.employee_ssn,
+            check_in_date = subquery.check_in_date,
+            check_out_date = subquery.check_out_date,
+            room_number = subquery.room_number
+        FROM (SELECT R.room_number, 
+                B.check_in_date,
+                B.check_out_date,
+                B.employee_ssn,
+                B.checked_in,
+				B.paid
+            FROM Room R, 
+                BookingRental B
+            WHERE NEW.booking_id = B.booking_id AND
+                B.room_id = R.room_id) as subquery
+        WHERE Archive.archive_id = NEW.booking_id;
         RETURN NULL;
     END;
 $update_archive$ LANGUAGE plpgsql;

@@ -145,8 +145,7 @@ CREATE TABLE BookingRental(
 
 DROP TABLE IF EXISTS Archive CASCADE;
 CREATE TABLE Archive (
-    archive_id SERIAL PRIMARY KEY,
-    booking_id INT NOT NULL,
+    archive_id INT PRIMARY KEY,
     room_number INT NOT NULL,
     street_number INT NOT NULL,
     street_name VARCHAR(255) NOT NULL,
