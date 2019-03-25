@@ -70,6 +70,10 @@ require_once("../../helpers/login_check.php");
     <input type=\"hidden\" name=\"id\" value=\"" . $line["room_id"] . "\"/>
     <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Amenities\" />
     </form>
+    <form action=\"../booking/booking_add.php\" method=\"post\">
+    <input type=\"hidden\" name=\"id\" value=\"" . $line["room_id"] . "\"/>
+    <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Make a Booking\" />
+    </form>
     <form action=\"\" method=\"post\">
       <input type=\"hidden\" name=\"delete_id\" value=\"" . $line["room_id"] . "\"/>
       <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete Room\" />

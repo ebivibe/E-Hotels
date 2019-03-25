@@ -51,29 +51,33 @@ require_once("../../helpers/login_check.php");
               <div class="form-group">
               <label for="sea_view">Sea View:</label>
               <select name="sea_view" class="form-control" value="' . $row[5] . '">
-              <option class="dropdown-item" value="t">Yes</option>
-              <option class="dropdown-item" value="f">No</option>  
+              <option class="dropdown-item" value="t" ';  if ($row[5] == 't') echo 'selected = "selected"'; echo '>Yes</option>
+            <option class="dropdown-item" value="f" ';  if ($row[5] == 'f') echo 'selected = "selected"'; echo '>No</option>  
+           
               </select>
               </div>
               <div class="form-group">
               <label for="mountain_view">Montain View:</label>
               <select name="mountain_view" class="form-control" value="' . $row[6] . '">
-              <option class="dropdown-item" value="t">Yes</option>
-              <option class="dropdown-item" value="f">No</option>  
+              <option class="dropdown-item" value="t" ';  if ($row[6] == 't') echo 'selected = "selected"'; echo '>Yes</option>
+              <option class="dropdown-item" value="f" ';  if ($row[6] == 'f') echo 'selected = "selected"'; echo '>No</option>  
+             
               </select>
               </div>
               <div class="form-group">
               <label for="damages">Damages:</label>
               <select name="damages" class="form-control" value="' . $row[7] . '">
-              <option class="dropdown-item" value="t">Yes</option>
-              <option class="dropdown-item" value="f">No</option>  
+              <option class="dropdown-item" value="t" ';  if ($row[7] == 't') echo 'selected = "selected"'; echo '>Yes</option>
+              <option class="dropdown-item" value="f" ';  if ($row[7] == 'f') echo 'selected = "selected"'; echo '>No</option>  
+             
               </select>
               </div>
               <div class="form-group">
               <label for="can_be_extended">Can be extended:</label>
               <select name="can_be_extended" class="form-control" value="' . $row[8] . '">
-              <option class="dropdown-item" value="t">Yes</option>
-              <option class="dropdown-item" value="f">No</option>  
+              <option class="dropdown-item" value="t" ';  if ($row[8] == 't') echo 'selected = "selected"'; echo '>Yes</option>
+              <option class="dropdown-item" value="f" ';  if ($row[8] == 'f') echo 'selected = "selected"'; echo '>No</option>  
+             
               </select>
               </div>
               <button type="submit" class="btn btn-primary" value="Submit">Submit</button>

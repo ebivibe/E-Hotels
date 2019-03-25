@@ -137,13 +137,15 @@ CREATE TABLE BookingRental(
     room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE RESTRICT,
     customer_ssn INT NOT NULL REFERENCES Customer(SSN) ON DELETE RESTRICT,
     employee_ssn INT REFERENCES Employee(SSN) ON DELETE RESTRICT,
-    CONSTRAINT booking_id CHECK (booking_id > 0)
+    CONSTRAINT booking_id CHECK (booking_id > 0),
+    CONSTRAINT dates1 CHECK (check_in_date<check_out_date),
+    CONSTRAINT dates2 CHECK (reservation_date<=check_in_date)
 );
 
 
 DROP TABLE IF EXISTS Archive CASCADE;
 CREATE TABLE Archive (
-    archive_id SERIAL PRIMARY KEY,
+    archive_id INT PRIMARY KEY,
     room_number INT NOT NULL,
     street_number INT NOT NULL,
     street_name VARCHAR(255) NOT NULL,
@@ -166,9 +168,10 @@ CREATE TABLE Archive (
 );
 
 CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
-	BEGIN INSERT INTO Archive(room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
-        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in)
-            SELECT R.room_number, 
+	BEGIN INSERT INTO Archive(archive_id, room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
+        hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in, paid)
+            SELECT B.booking_id as archive_id,
+                R.room_number, 
                 H.street_number,
                 H.street_name,
                 H.unit,
@@ -182,7 +185,8 @@ CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
                 B.check_out_date,
                 B.customer_ssn,
                 B.employee_ssn,
-                B.checked_in
+                B.checked_in,
+				B.paid
             FROM Room R, 
                 Hotel H, 
                 HotelChain HC, 
@@ -194,6 +198,29 @@ CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
 			RETURN NULL;
 	END;
 $archive$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_archive() RETURNS TRIGGER AS $update_archive$
+    BEGIN UPDATE Archive
+        SET checked_in = subquery.checked_in,
+            paid = subquery.paid,
+            employee_ssn = subquery.employee_ssn,
+            check_in_date = subquery.check_in_date,
+            check_out_date = subquery.check_out_date,
+            room_number = subquery.room_number
+        FROM (SELECT R.room_number, 
+                B.check_in_date,
+                B.check_out_date,
+                B.employee_ssn,
+                B.checked_in,
+				B.paid
+            FROM Room R, 
+                BookingRental B
+            WHERE NEW.booking_id = B.booking_id AND
+                B.room_id = R.room_id) as subquery
+        WHERE Archive.archive_id = NEW.booking_id;
+        RETURN NULL;
+    END;
+$update_archive$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION inc() RETURNS TRIGGER AS $inc$
 	BEGIN UPDATE HotelChain 
@@ -217,6 +244,12 @@ CREATE TRIGGER add_archive
     AFTER INSERT ON BookingRental 
 	FOR EACH ROW
 	EXECUTE FUNCTION archive_data();		
+
+DROP TRIGGER IF EXISTS update_archive ON BookingRental;
+CREATE TRIGGER update_archive
+    AFTER UPDATE ON BookingRental
+    FOR EACH ROW
+    EXECUTE FUNCTION update_archive();
 
 DROP TRIGGER IF EXISTS increment ON Hotel;
 CREATE TRIGGER increment 
@@ -253,4 +286,4 @@ insert into room(room_number, hotel_id, price, capacity, sea_view, mountain_view
 );
 
 insert into bookingrental(reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn, employee_ssn)
-	values (now(), now(), now(), false, 1, 555, 565);
+	values (now(), now(), now() + INTERVAL '1 DAY', false, 1, 555, 565);
