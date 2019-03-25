@@ -132,26 +132,14 @@ CREATE TABLE BookingRental(
     reservation_date TIMESTAMP NOT NULL,
     check_in_date TIMESTAMP NOT NULL,
     check_out_date TIMESTAMP NOT NULL,
-    checked_in BOOLEAN NOT NULL,
+    checked_in BOOLEAN DEFAULT FALSE NOT NULL,
+    paid BOOLEAN DEFAULT FALSE NOT NULL,
     room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE RESTRICT,
     customer_ssn INT NOT NULL REFERENCES Customer(SSN) ON DELETE RESTRICT,
     employee_ssn INT REFERENCES Employee(SSN) ON DELETE RESTRICT,
     CONSTRAINT booking_id CHECK (booking_id > 0)
 );
 
-DROP TABLE IF EXISTS Payment CASCADE;
-CREATE TABLE Payment(
-    payment_id SERIAL PRIMARY KEY,
-    booking_id INT NOT NULL REFERENCES BookingRental(booking_id) ON DELETE RESTRICT,
-    card_number INT NOT NULL,
-    expiry_month INT NOT NULL,
-    expiry_year INT NOT NULL,
-    cvc INT NOT NULL,
-    amount INT NOT NULL,
-    CONSTRAINT cvc CHECK (cvc > 0),
-    CONSTRAINT amount CHECK (amount > 0),
-    CONSTRAINT card_number CHECK (card_number > 0)
-);
 
 DROP TABLE IF EXISTS Archive CASCADE;
 CREATE TABLE Archive (
@@ -169,6 +157,7 @@ CREATE TABLE Archive (
     reservation_date TIMESTAMP,
     check_out_date TIMESTAMP NOT NULL,
     checked_in BOOLEAN NOT NULL,
+    paid BOOLEAN NOT NULL,
     customer_ssn INT NOT NULL,
     employee_ssn INT NOT NULL,
     CONSTRAINT archive_id CHECK (archive_id > 0),
