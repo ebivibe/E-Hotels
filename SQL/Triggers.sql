@@ -1,7 +1,8 @@
 CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
-	BEGIN INSERT INTO Archive(room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
+	BEGIN INSERT INTO Archive(booking_id, room_number, street_number, street_name, unit, hotel_city, hotel_province, hotel_country, 
         hotel_zip, check_in_date, hotel_chain_name, reservation_date, check_out_date, customer_ssn, employee_ssn, checked_in)
-            SELECT R.room_number, 
+            SELECT B.booking_id,
+                R.room_number, 
                 H.street_number,
                 H.street_name,
                 H.unit,
@@ -28,6 +29,14 @@ CREATE OR REPLACE FUNCTION archive_data() RETURNS TRIGGER AS $archive$
 	END;
 $archive$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION update_archive() RETURNS TRIGGER AS $update_archive$
+    BEGIN UPDATE Archive
+        SET checked_in = NEW.checked_in
+        WHERE booking_id = NEW.booking_id;
+        RETURN NULL;
+    END;
+$update_archive$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION inc() RETURNS TRIGGER AS $inc$
 	BEGIN UPDATE HotelChain 
 		SET num_hotels = num_hotels + 1 
@@ -50,6 +59,12 @@ CREATE TRIGGER add_archive
     AFTER INSERT ON BookingRental 
 	FOR EACH ROW
 	EXECUTE FUNCTION archive_data();		
+
+DROP TRIGGER IF EXISTS update_archive ON BookingRental;
+CREATE TRIGGER update_archive
+    AFTER UPDATE ON BookingRental
+    FOR EACH ROW
+    EXECUTE FUNCTION update_archive();
 
 DROP TRIGGER IF EXISTS increment ON Hotel;
 CREATE TRIGGER increment 
