@@ -19,7 +19,7 @@ require_once("../../helpers/login_check.php");
     if (!empty($_POST)) {
       if (isset($_POST["booking_id"])) {
         $query = 'update public.BookingRental set reservation_date=\'' . $_POST['reservation_date'] . '\', check_in_date=\'' . $_POST['check_in_date'] . '\',
-        check_out_date=\'' . $_POST['check_out_date'] . '\',  checked_in=\'' . $_POST['checked_in'] . '\',  paid=\'' . $_POST['paid'] . '\' 
+        check_out_date=\'' . $_POST['check_out_date'] . '\',  checked_in=\'' . $_POST['checked_in'] . '\',  paid=\'' . $_POST['paid'] . '\', employee_ssn='. $_POST['employee_ssn'].'
         where booking_id=' . $_POST['booking_id'];
         print_r($query);
         $result = pg_query($query);

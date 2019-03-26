@@ -65,7 +65,7 @@ require_once("../../helpers/login_check.php");
              </div>
              <div class=\"form-group\">
              <label for=\"employee_ssn\">Employee SSN:</label>
-             <input type=\"text\" class=\"form-control\" name=\"employee_ssn\" placeholder=\"Employee SSN\" value=" . $row[8] . " required readonly>
+             <input type=\"text\" class=\"form-control\" name=\"employee_ssn\" placeholder=\"Employee SSN\" value=" . $row[8] . " required>
             </div>
             <button type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">Submit</button>
           </form>";

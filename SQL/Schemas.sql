@@ -19,7 +19,7 @@ CREATE TABLE HotelChain (
 
 DROP TABLE IF EXISTS ChainPhoneNumber CASCADE;
 CREATE TABLE ChainPhoneNumber(
-    chain_id INT NOT NULL REFERENCES HotelChain(chain_id) ON DELETE RESTRICT,
+    chain_id INT NOT NULL REFERENCES HotelChain(chain_id) ON DELETE CASCADE,
     phone_number VARCHAR(255) NOT NULL,
     PRIMARY KEY(chain_id, phone_number)
 );
@@ -27,7 +27,7 @@ CREATE TABLE ChainPhoneNumber(
 DROP TABLE IF EXISTS Hotel CASCADE;
 CREATE TABLE Hotel (
  hotel_id SERIAL PRIMARY KEY,
- chain_id INTEGER NOT NULL REFERENCES HotelChain(chain_id) ON DELETE RESTRICT,
+ chain_id INTEGER NOT NULL REFERENCES HotelChain(chain_id) ON DELETE CASCADE,
  category INT NOT NULL,
  email VARCHAR(255) NOT NULL,
  street_number INT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE Hotel (
 
 DROP TABLE IF EXISTS HotelPhoneNumber CASCADE;
 CREATE TABLE HotelPhoneNumber(
-    hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE RESTRICT,
+    hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
     phone_number VARCHAR(255) NOT NULL,
     PRIMARY KEY(hotel_id, phone_number)
 );
@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS Room CASCADE;
 CREATE TABLE Room(
   room_id SERIAL PRIMARY KEY,
   room_number INT NOT NULL,
-  hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE RESTRICT,
+  hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
   price INT NOT NULL,
   capacity INT NOT NULL,
   sea_view BOOLEAN NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE Room(
 
 DROP TABLE IF EXISTS Amenity CASCADE;
 CREATE TABLE Amenity(
-    room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE RESTRICT,
+    room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     PRIMARY KEY(room_id, name)
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS Employee CASCADE;
 CREATE TABLE Employee (
  SSN INT PRIMARY KEY,
  name VARCHAR (255) NOT NULL,
- hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE RESTRICT,
+ hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
  street_number INT NOT NULL,
  street_name VARCHAR(255) NOT NULL,
  unit VARCHAR(255),
@@ -92,8 +92,8 @@ CREATE TABLE Employee (
 
 DROP TABLE IF EXISTS Manages CASCADE;
 CREATE TABLE Manages(
- SSN INT NOT NULL REFERENCES Employee(SSN) ON DELETE RESTRICT,
- hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE RESTRICT,
+ SSN INT NOT NULL REFERENCES Employee(SSN) ON DELETE CASCADE,
+ hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
  PRIMARY KEY(SSN, hotel_id)
 );
 
@@ -106,8 +106,8 @@ CREATE TABLE Role(
 
 DROP TABLE IF EXISTS EmployeeRole CASCADE;
 CREATE TABLE EmployeeRole(
- employee_ssn INT NOT NULL REFERENCES Employee(SSN) ON DELETE RESTRICT,
- role_id INT NOT NULL REFERENCES Role(role_id) ON DELETE RESTRICT,
+ employee_ssn INT NOT NULL REFERENCES Employee(SSN) ON DELETE CASCADE,
+ role_id INT NOT NULL REFERENCES Role(role_id) ON DELETE CASCADE,
  PRIMARY KEY(employee_ssn, role_id)
 );
 
@@ -136,9 +136,9 @@ CREATE TABLE BookingRental(
     check_out_date TIMESTAMP NOT NULL,
     checked_in BOOLEAN DEFAULT FALSE NOT NULL,
     paid BOOLEAN DEFAULT FALSE NOT NULL,
-    room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE RESTRICT,
-    customer_ssn INT NOT NULL REFERENCES Customer(SSN) ON DELETE RESTRICT,
-    employee_ssn INT REFERENCES Employee(SSN) ON DELETE RESTRICT,
+    room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE CASCADE,
+    customer_ssn INT NOT NULL REFERENCES Customer(SSN) ON DELETE CASCADE,
+    employee_ssn INT REFERENCES Employee(SSN) ON DELETE CASCADE,
     CONSTRAINT booking_id CHECK (booking_id > 0),
     CONSTRAINT dates1 CHECK (check_in_date<check_out_date),
     CONSTRAINT dates2 CHECK (reservation_date<=check_in_date),
