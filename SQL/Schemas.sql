@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS btree_gist;
+
 DROP TABLE IF EXISTS HotelChain CASCADE;
 CREATE TABLE HotelChain (
  chain_id SERIAL PRIMARY KEY,
@@ -139,7 +141,8 @@ CREATE TABLE BookingRental(
     employee_ssn INT REFERENCES Employee(SSN) ON DELETE RESTRICT,
     CONSTRAINT booking_id CHECK (booking_id > 0),
     CONSTRAINT dates1 CHECK (check_in_date<check_out_date),
-    CONSTRAINT dates2 CHECK (reservation_date<=check_in_date)
+    CONSTRAINT dates2 CHECK (reservation_date<=check_in_date),
+    CONSTRAINT overlapping EXCLUDE USING gist (tsrange(check_in_date, check_out_date) WITH &&, room_id WITH =)
 );
 
 
@@ -159,9 +162,9 @@ CREATE TABLE Archive (
     reservation_date TIMESTAMP,
     check_out_date TIMESTAMP NOT NULL,
     checked_in BOOLEAN NOT NULL,
-    paid BOOLEAN NOT NULL,
+    paid BOOLEAN DEFAULT FALSE NOT NULL,
     customer_ssn INT NOT NULL,
-    employee_ssn INT NOT NULL,
+    employee_ssn INT,
     CONSTRAINT archive_id CHECK (archive_id > 0),
     CONSTRAINT street_number CHECK (street_number > 0),
     CONSTRAINT room_number CHECK (room_number > 0)
