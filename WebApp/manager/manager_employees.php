@@ -61,6 +61,10 @@ require_once("../helpers/login_check.php");
                   <input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/>
                   <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Edit\" />
                   </form>
+                  <form action=\"employee/employee_delete.php\" method=\"post\">
+                  <input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/>
+                  <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Delete\" />
+                  </form>
                   <form action=\"employee/employee_roles.php\" method=\"post\">
                   <input type=\"hidden\" name=\"id\" value=\"" . $line["ssn"] . "\"/>
                   <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"View Roles\" />

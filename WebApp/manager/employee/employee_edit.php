@@ -74,27 +74,7 @@ require_once("../../helpers/login_check.php");
            <input type=\"text\" class=\"form-control\" name=\"password\" placeholder=\"Password\" value=" . $row[10] . " required>
           </div>
             <button type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">Submit</button>
-          </form>
-          <form action=\"\" method=\"post\" class=\"loginform\">
-          <input type=\"text\" class=\"form-control\" name=\"ssn\" placeholder=\"SSN\" value=" . $row[0] . " required hidden>
-          <button type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">Delete Customer</button>
           </form>";
-          }
-        }
-
-        if (!empty($_POST)) {
-          if (isset($_POST["ssn"])) {
-            $query = 'delete from public.Employee where SSN=' . $_POST["ssn"];
-            $result = pg_query($query);
-            print_r($query);
-
-            if (!$result) {
-              echo "<script>alert('Edit Failed');</script>";
-              header("Location: ../manager_employees.php");
-            } else {
-              echo "<script>alert('Edit Success');</script>";
-              header("Location: ../manager_employees.php");
-            }
           }
         }
 
