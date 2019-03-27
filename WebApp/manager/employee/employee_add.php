@@ -18,7 +18,7 @@ require_once("../../helpers/login_check.php");
 
 
     <center>
-        <h1 class="title">Customer Add</h1>
+        <h1 class="title">Employee Add</h1>
         <form action="employee_add_request" method="post" class="loginform">
             <div class="form-group">
                 <label for="ssn">SSN:</label>
