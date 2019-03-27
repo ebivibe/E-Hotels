@@ -19,7 +19,7 @@ require_once("../../helpers/login_check.php");
     <center>
         <h1 class="title">Booking Add</h1>
         
-        <form action="" method="post" class="loginform">
+        <form action="booking_add_request.php" method="post" class="loginform">
         <?php if (!empty($_POST)) {
                   if (isset($_POST["id"])) {
                     echo '<input type="hidden" class="form-control" name="room_id"  value="' . $_POST["id"] . '" >';
@@ -29,21 +29,21 @@ require_once("../../helpers/login_check.php");
             <div class="form-group">
                 <label for="name">Reservation Date:</label>
                 <?php
-               //date_picker("reservation_date", "Enter the reservation date");
-               echo "<input type=\"text\" class=\"form-control\" name=\"reservation_date\" placeholder=\"Reservation Date\"  required>";
+               date_picker("reservation_date", "Enter the reservation date");
+               //echo "<input type=\"text\" class=\"form-control\" name=\"reservation_date\" placeholder=\"Reservation Date\"  required>";
                 ?></div>
             <div class="form-group">
                 <label for="email">Check In Date:</label>
                 <?php
-                //date_picker("check_in_date", "Enter the check in date");
-                echo " <input type=\"text\" class=\"form-control\" name=\"check_in_date\" placeholder=\"Check In Date\"  required> ";
+                date_picker("check_in_date", "Enter the check in date");
+                //echo " <input type=\"text\" class=\"form-control\" name=\"check_in_date\" placeholder=\"Check In Date\"  required> ";
                 ?>
                 </div>
             <div class="form-group">
                 <label for="email">Check Out Date:</label>
                 <?php
-                //date_picker("check_out_date", "Enter the check out date");
-                echo " <input type=\"text\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
+                date_picker("check_out_date", "Enter the check out date");
+                //echo " <input type=\"text\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
                 ?>
                 </div>
             <div class="form-group">
@@ -75,27 +75,7 @@ require_once("../../helpers/login_check.php");
 
     </center>
 
-    <?php
-    if (!empty($_POST)) {
-        if (isset($_POST["room_id"])) {
-            $query = 'insert into public.BookingRental(reservation_date, check_in_date, check_out_date, checked_in, paid, room_id, customer_ssn, employee_ssn) values(
-                \'' . $_POST['reservation_date'] . '\', \'' . $_POST['check_in_date'] . '\', \'' . $_POST['check_out_date'] . '\', \'' . $_POST['checked_in'] . '\',
-                \'' . $_POST['paid'] . '\', ' . $_POST['room_id'] . ', ' . $_POST['customer_ssn'] . ', ' . $_POST['employee_ssn'] . ')';
-            $result = pg_query($query);
-            print_r($query);
-
-            if (!$result) {
-                $_SESSION['message'] = "Edit failed";
-              header("Location: ../manager_employees.php");
-            } else {
-                $_SESSION['message'] = "Edit Successful";
-              header("Location: ../manager_employees.php");
-            }
-        }
-    }
-
-
-    ?>
+   
 
 
 
