@@ -41,7 +41,7 @@ require_once("../../helpers/login_check.php");
                           '<th scope="col">
     <form action="room_add.php" method="post">
     <input type="hidden" name="id" value="' . $_POST["id"] . '"/>
-    <input class="btn btn-primary" type="submit" name="submit-btn" value="Add" />
+    <input class="btn btn-outline-success" type="submit" name="submit-btn" value="Add" />
     </form>
     </th>
     </tr>
@@ -58,7 +58,7 @@ require_once("../../helpers/login_check.php");
                           }
                           echo "<td>
     <div class=\"dropdown\">
-    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+    <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
       Options
     </button>
     <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">

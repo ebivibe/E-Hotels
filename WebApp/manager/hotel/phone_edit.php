@@ -37,8 +37,8 @@ require_once("../../helpers/login_check.php");
             <label for="name">Phone Number:</label>
             <input type="text" class="form-control" name="phone_number" placeholder="Phone Number" value="' . $row[1] . '" required>
              </div>
-              <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
-              <a href="../manager_chains" class="btn btn-primary">Cancel</a>
+              <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+              <a href="../manager_chains" class="btn btn-outline-success">Cancel</a>
             </form>';
           }
         }

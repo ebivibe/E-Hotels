@@ -63,7 +63,7 @@ require_once("../helpers/login_check.php");
                     echo "\t\t<td>".$line["employee_ssn"]."</td>\n";
                     echo "<td>
                   <div class=\"dropdown\">
-                  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                  <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     Options
                   </button>
                   <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">

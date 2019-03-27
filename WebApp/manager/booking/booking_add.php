@@ -62,7 +62,7 @@ require_once("../../helpers/login_check.php");
                 <label for="employee_ssn">Employee SSN:</label>
                 <input type="number" class="form-control" name="employee_ssn" placeholder="Employee SSN" required>
             </div>
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
         </form>
 
 

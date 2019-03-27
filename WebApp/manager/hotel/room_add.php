@@ -69,8 +69,8 @@ require_once("../../helpers/login_check.php");
                     <option class="dropdown-item" value="false">No</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
-            <a href="../manager_chains" class="btn btn-primary">Cancel</button>
+            <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
+            <a href="../manager_chains" class="btn btn-outline-success">Cancel</button>
         </form>
 
 

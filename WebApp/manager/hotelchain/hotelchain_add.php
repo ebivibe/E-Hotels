@@ -55,7 +55,7 @@ include("../../helpers/common.php");
             <label for="email">Zip:</label>
             <input type="text" class="form-control" name="zip" placeholder="Zip" required>
            </div>
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
           </form>
 
 

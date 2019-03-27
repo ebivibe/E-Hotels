@@ -34,7 +34,7 @@ require_once("../helpers/login_check.php");
                     <th scope="col">Zip</th>
                     <th scope="col">Registration Date</th>
                     <th scope="col">Password</th>
-                    <th scope="col"> <a class="btn btn-primary" href="customer/customer_add.php" role="button">Add Customer</a></th>
+                    <th scope="col"> <a class="btn btn-outline-success" href="customer/customer_add.php" role="button">Add Customer</a></th>
              
                 </tr>
             </thead>
@@ -53,7 +53,7 @@ require_once("../helpers/login_check.php");
                     echo "\t\t<td>$col_value</td>\n";
                   }
                    echo "<td><div class=\"dropdown\">
-                  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                  <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     Options
                   </button>
                   <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">

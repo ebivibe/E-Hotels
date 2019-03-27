@@ -33,7 +33,7 @@ require_once("../helpers/login_check.php");
                     <th scope="col">Country</th>
                     <th scope="col">Zip</th>
                     <th scope="col">Password</th>
-                    <th scope="col"> <a class="btn btn-primary" href="employee/employee_add.php" role="button">Add Employee</a></th>
+                    <th scope="col"> <a class="btn btn-outline-success" href="employee/employee_add.php" role="button">Add Employee</a></th>
              
                 </tr>
             </thead>
@@ -53,7 +53,7 @@ require_once("../helpers/login_check.php");
                   }
 
                   echo "<td><div class=\"dropdown\">
-                  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                  <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     Options
                   </button>
                   <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">

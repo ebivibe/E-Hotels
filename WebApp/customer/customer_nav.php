@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-dark">
+<nav class="shadow navbar navbar-light navbar-expand-sm" style="background-color: #294f30;">
 
   <!-- Links -->
   <ul class="navbar-nav">

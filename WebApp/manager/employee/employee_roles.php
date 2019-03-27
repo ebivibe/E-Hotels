@@ -37,7 +37,7 @@ require_once("../../helpers/login_check.php");
                                 '<th scope="col">
     <form action="role/role_add.php" method="post">
     <input type="hidden" name="id" value="' . $_POST["id"] . '"/>
-    <input class="btn btn-primary" type="submit" name="submit-btn" value="Add" />
+    <input class="btn btn-outline-success" type="submit" name="submit-btn" value="Add" />
     </form>
     </th>
     </tr>
@@ -54,7 +54,7 @@ require_once("../../helpers/login_check.php");
                                 }
                                 echo "<td>
     <div class=\"dropdown\">
-    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+    <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
       Options
     </button>
     <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
@@ -93,7 +93,7 @@ require_once("../../helpers/login_check.php");
 
         echo '<form action="role/manager_toggle.php" method="post">
         <input type="hidden" name="ssn" value="' . $_POST['id'] .'"/>
-        <button type="submit" style="margin-top: 20px;" class="btn btn-primary" value="Submit">Toggle Manager Status</button>
+        <button type="submit" style="margin-top: 20px;" class="btn btn-outline-success" value="Submit">Toggle Manager Status</button>
         </form>';
         ?>
         

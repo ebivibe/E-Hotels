@@ -59,7 +59,7 @@
                 <label for="email">Password:</label>
                 <input type="text" class="form-control" name="password" placeholder="Password"  minlength="5" required>
             </div>
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
         </form>
 
 

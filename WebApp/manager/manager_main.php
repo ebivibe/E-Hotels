@@ -22,7 +22,7 @@ include("manager_nav.php")
 echo $_SESSION['user_id'] ;
 ?>
 </h1>
-<a class="btn btn-primary logoutbutton" href="../helpers/logout.php">Logout</a>
+<a class="btn btn-outline-success logoutbutton" href="../helpers/logout.php">Logout</a>
 
 </center>
 

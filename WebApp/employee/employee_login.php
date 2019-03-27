@@ -21,7 +21,7 @@ include("../helpers/common.php");
   <div class="form-group">
     <input type="password" class="form-control" name="password" placeholder="Password" required>
   </div>
-  <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+  <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
 </form>
 </center>
 <?php
