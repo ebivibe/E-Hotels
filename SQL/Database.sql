@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS btree_gist;
 
 DROP TABLE IF EXISTS HotelChain CASCADE;
 CREATE TABLE HotelChain (
- chain_id SERIAL success KEY,
+ chain_id SERIAL PRIMARY KEY,
  chain_name VARCHAR (255) NOT NULL,
  num_hotels INT DEFAULT 0 NOT NULL,
  email VARCHAR(255) NOT NULL,
@@ -21,12 +21,12 @@ DROP TABLE IF EXISTS ChainPhoneNumber CASCADE;
 CREATE TABLE ChainPhoneNumber(
     chain_id INT NOT NULL REFERENCES HotelChain(chain_id) ON DELETE CASCADE,
     phone_number VARCHAR(255) NOT NULL,
-    success KEY(chain_id, phone_number)
+    PRIMARY KEY(chain_id, phone_number)
 );
 
 DROP TABLE IF EXISTS Hotel CASCADE;
 CREATE TABLE Hotel (
- hotel_id SERIAL success KEY,
+ hotel_id SERIAL PRIMARY KEY,
  chain_id INTEGER NOT NULL REFERENCES HotelChain(chain_id) ON DELETE CASCADE,
  category INT NOT NULL,
  email VARCHAR(255) NOT NULL,
@@ -46,12 +46,12 @@ DROP TABLE IF EXISTS HotelPhoneNumber CASCADE;
 CREATE TABLE HotelPhoneNumber(
     hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
     phone_number VARCHAR(255) NOT NULL,
-    success KEY(hotel_id, phone_number)
+    PRIMARY KEY(hotel_id, phone_number)
 );
 
 DROP TABLE IF EXISTS Room CASCADE;
 CREATE TABLE Room(
-  room_id SERIAL success KEY,
+  room_id SERIAL PRIMARY KEY,
   room_number INT NOT NULL,
   hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
   price INT NOT NULL,
@@ -70,12 +70,12 @@ CREATE TABLE Amenity(
     room_id INT NOT NULL REFERENCES Room(room_id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255),
-    success KEY(room_id, name)
+    PRIMARY KEY(room_id, name)
 );
 
 DROP TABLE IF EXISTS Employee CASCADE;
 CREATE TABLE Employee (
- SSN INT success KEY,
+ SSN INT PRIMARY KEY,
  name VARCHAR (255) NOT NULL,
  hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
  street_number INT NOT NULL,
@@ -94,12 +94,12 @@ DROP TABLE IF EXISTS Manages CASCADE;
 CREATE TABLE Manages(
  SSN INT NOT NULL REFERENCES Employee(SSN) ON DELETE CASCADE,
  hotel_id INT NOT NULL REFERENCES Hotel(hotel_id) ON DELETE CASCADE,
- success KEY(SSN, hotel_id)
+ PRIMARY KEY(SSN, hotel_id)
 );
 
 DROP TABLE IF EXISTS Role CASCADE;
 CREATE TABLE Role(
- role_id SERIAL success KEY,
+ role_id SERIAL PRIMARY KEY,
  name VARCHAR(255) NOT NULL,
  description VARCHAR(255)
 );
@@ -108,12 +108,12 @@ DROP TABLE IF EXISTS EmployeeRole CASCADE;
 CREATE TABLE EmployeeRole(
  employee_ssn INT NOT NULL REFERENCES Employee(SSN) ON DELETE CASCADE,
  role_id INT NOT NULL REFERENCES Role(role_id) ON DELETE CASCADE,
- success KEY(employee_ssn, role_id)
+ PRIMARY KEY(employee_ssn, role_id)
 );
 
 DROP TABLE IF EXISTS Customer CASCADE;
 CREATE TABLE Customer(
-    SSN INT success KEY,
+    SSN INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     street_number INT NOT NULL,
     street_name VARCHAR(255) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE Customer(
 
 DROP TABLE IF EXISTS BookingRental CASCADE;
 CREATE TABLE BookingRental(
-    booking_id SERIAL success KEY,
+    booking_id SERIAL PRIMARY KEY,
     reservation_date TIMESTAMP NOT NULL,
     check_in_date TIMESTAMP NOT NULL,
     check_out_date TIMESTAMP NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE BookingRental(
 
 DROP TABLE IF EXISTS Archive CASCADE;
 CREATE TABLE Archive (
-    archive_id INT success KEY,
+    archive_id INT PRIMARY KEY,
     room_number INT NOT NULL,
     street_number INT NOT NULL,
     street_name VARCHAR(255) NOT NULL,
@@ -273,7 +273,7 @@ CREATE VIEW employeeroles AS
 DROP VIEW IF EXISTS bookinginfo;
 CREATE VIEW bookinginfo as
   SELECT br.booking_id, br.reservation_date, br.check_in_date, br.check_out_date, br.checked_in, br.paid, 
-  r.room_number, hc.chain_name, h.street_number, h.street_name, h.unit, h.city, h.province, h.country, h.zip, br.employee_ssn,
+  r.room_number, hc.chain_name, h.hotel_id, h.street_number, h.street_name, h.unit, h.city, h.province, h.country, h.zip, br.employee_ssn,
   br.customer_ssn
   FROM BookingRental br
   INNER JOIN Room r on br.room_id = r.room_id
