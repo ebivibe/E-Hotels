@@ -8,7 +8,6 @@ require_once("../../helpers/login_check.php");
 
 <head>
     <?php
-
     include("../../helpers/imports.php");
     include("../../helpers/common.php");
     ?>
@@ -21,8 +20,7 @@ require_once("../../helpers/login_check.php");
         <h1 class="title">Booking Add</h1>
         
         <form action="" method="post" class="loginform">
-        <?php
-                if (!empty($_POST)) {
+        <?php if (!empty($_POST)) {
                   if (isset($_POST["id"])) {
                     echo '<input type="hidden" class="form-control" name="room_id"  value="' . $_POST["id"] . '" >';
                   }
@@ -30,16 +28,24 @@ require_once("../../helpers/login_check.php");
                 ?>
             <div class="form-group">
                 <label for="name">Reservation Date:</label>
-                <input type="text" class="form-control" name="reservation_date" placeholder="Reservation Date" required>
-            </div>
+                <?php
+               //date_picker("reservation_date", "Enter the reservation date");
+               echo "<input type=\"text\" class=\"form-control\" name=\"reservation_date\" placeholder=\"Reservation Date\"  required>";
+                ?></div>
             <div class="form-group">
                 <label for="email">Check In Date:</label>
-                <input type="text" class="form-control" name="check_in_date" placeholder="Check In Date" required>
-            </div>
+                <?php
+                //date_picker("check_in_date", "Enter the check in date");
+                echo " <input type=\"text\" class=\"form-control\" name=\"check_in_date\" placeholder=\"Check In Date\"  required> ";
+                ?>
+                </div>
             <div class="form-group">
                 <label for="email">Check Out Date:</label>
-                <input type="text" class="form-control" name="check_out_date" placeholder="Check Out Date" required>
-            </div>
+                <?php
+                //date_picker("check_out_date", "Enter the check out date");
+                echo " <input type=\"text\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
+                ?>
+                </div>
             <div class="form-group">
                 <label for="checked_in">Checked In:</label>
                 <select name="checked_in" class="form-control" >
@@ -80,10 +86,10 @@ require_once("../../helpers/login_check.php");
 
             if (!$result) {
                 $_SESSION['message'] = "Edit failed";
-                header("Location: ../manager_customers.php");
+              header("Location: ../manager_employees.php");
             } else {
                 $_SESSION['message'] = "Edit Successful";
-                header("Location: ../manager_customers.php");
+              header("Location: ../manager_employees.php");
             }
         }
     }

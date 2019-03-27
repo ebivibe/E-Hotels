@@ -32,7 +32,8 @@ require_once("../../helpers/login_check.php");
             <div class="form-group">
                 <label for="email">Check Out Date:</label>
                 <?php
-                date_picker("check_out_date", "Enter the check out date")
+                //date_picker("check_out_date", "Enter the check out date");
+                echo " <input type=\"text\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
                 ?>
             </div>
             <div class="form-group">
