@@ -14,6 +14,23 @@
 
 <body>
 
+<?php
+
+session_start();
+if(isset($_SESSION['message'])){
+  echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">'.$_SESSION['message'].'
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+  </div>';
+  unset($_SESSION['message']);
+}
+if(isset($_SESSION['user_id'] )){
+  unset($_SESSION['user_id']);
+}
+
+?>
+
 
     <center>
         <h1 class="title">Customer Add</h1>
@@ -75,8 +92,9 @@
         $result = pg_query($query);
         //print_r($query);
 
-        if (!$result) {
-          echo "<script>alert('Sign Up Failed');</script>";
+        if (!$result) {  
+        $_SESSION['message'] = "Sign up failed";
+        header("Location: sign_up.php");
         } else {
           echo "<script>alert('Sign Up Success');</script>";
           $_SESSION['user_id'] = $_POST['ssn'];

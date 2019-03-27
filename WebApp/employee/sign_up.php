@@ -11,7 +11,16 @@
 
 <body>
 
-
+<?php
+  if(isset($_SESSION['message'])){
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">'.$_SESSION['message'].'
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    </div>';
+    unset($_SESSION['message']);
+}
+?>
     <center>
         <h1 class="title">Customer Add</h1>
         <form action="" method="post" class="loginform">
@@ -77,9 +86,10 @@
         print_r($query);
 
         if (!$result) {
-          echo "<script>alert('Sign Up Failed');</script>";
+          
+         $_SESSION['message'] = "Sign up failed";
+          header("Location: sign_up.php");
         } else {
-          echo "<script>alert('Sign Up Success');</script>";
           $_SESSION['user_id'] = $_POST['ssn'];
           header("Location: employee_main.php");
         }

@@ -24,10 +24,10 @@ require_once("../../helpers/login_check.php");
           print_r($query);
 
           if (!$result) {
-            echo "<script>alert('Edit Failed');</script>";
+            $_SESSION['message'] = "Edit failed";
             header("Location: ../manager_employees.php");
           } else {
-            echo "<script>alert('Edit Success');</script>";
+            $_SESSION['message'] = "Edit Successful";
             header("Location: ../manager_employees.php");
           }
         }

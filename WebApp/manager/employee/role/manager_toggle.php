@@ -24,10 +24,10 @@ require_once("../../../helpers/login_check.php");
             $query = "Insert into public.Manages(ssn, hotel_id) values(".$_POST['ssn'].", (select hotel_id from public.Employee where ssn=".$_POST['ssn']."))";
             $result = pg_query($query);
             if (!$result) {
-                echo "<script>alert('Edit Failed');</script>";
+              $_SESSION['message'] = "Edit failed";
                 header("Location: ../../manager_employees.php");
               } else {
-                echo "<script>alert('Edit Success');</script>";
+                $_SESSION['message'] = "Edit Successful";
                 header("Location: ../../manager_employees.php");
               }
             
@@ -35,10 +35,10 @@ require_once("../../../helpers/login_check.php");
             $query = "Delete from public.Manages where ssn=".$_POST['ssn'];
             $result = pg_query($query);
             if (!$result) {
-                echo "<script>alert('Edit Failed');</script>";
+              $_SESSION['message'] = "Edit failed";
                 header("Location: ../../manager_employees.php");
               } else {
-                echo "<script>alert('Edit Success');</script>";
+                $_SESSION['message'] = "Edit Successful";
                 header("Location: ../../manager_employees.php");
               }
         }
