@@ -83,19 +83,19 @@ require_once("../helpers/login_check.php");
                     Options
                   </button>
                   <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"dropdownMenuButton\">";
-                    if ($line[checked_in] === "f") {
+                    if ($line["checked_in"] === "f") {
                         echo "<form action=\"booking/booking_check_in.php\" method=\"post\">
                   <input type=\"hidden\" name=\"id\" value=\"" . $line["booking_id"] . "\"/>
                   <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Check In Customer\" />
                   </form>";
                     }
-                    if ($line[paid] === "f") {
+                    if ($line["paid"] === "f") {
                         echo "<form action=\"booking/booking_pay.php\" method=\"post\">
                     <input type=\"hidden\" name=\"id\" value=\"" . $line["booking_id"] . "\"/>
                     <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Confirm Payment\" />
                   </form>";
                     }
-                    if ($line[paid] === "t" && $line[checked_in] === "t") {
+                    if ($line["paid"] === "t" && $line["checked_in"] === "t") {
                         echo '<div class="dropdown-item disabled"> Booking Complete</div>';
                     }
 
