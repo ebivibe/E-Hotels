@@ -19,15 +19,21 @@ require_once("../../helpers/login_check.php");
 
     <center>
         <h1 class="title">Customer Add</h1>
-        <form action="" method="post" class="loginform">
+        <form action="employee_add_request" method="post" class="loginform">
             <div class="form-group">
                 <label for="ssn">SSN:</label>
                 <input type="number" class="form-control" name="ssn" placeholder="SSN" required>
             </div>
-            <div class="form-group">
-                <label for="name">Hotel Id:</label>
-                <input type="number" class="form-control" name="hotel_id" placeholder="Hotel Id" required>
-            </div>
+            <?php echo "<div class=\"form-group\">
+            <label for=\"hotel_id\">Hotel ID:</label>
+            <select name=\"hotel_id\" class=\"form-control\" >";
+            $query = 'SELECT hotel_id FROM public.Hotel order by hotel_id';
+            $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+            while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+                echo "<option class=\"dropdown-item\" value=\"" . $line["hotel_id"] . "\" >" . $line["hotel_id"] . "</option>";
+            }
+            echo "</select></div>";
+            ?>
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" name="name" placeholder="Name" required>
@@ -62,7 +68,7 @@ require_once("../../helpers/login_check.php");
             </div>
             <div class="form-group">
                 <label for="email">Password:</label>
-                <input type="text" class="form-control" name="password" placeholder="Password"  minlength="5" required>
+                <input type="text" class="form-control" name="password" placeholder="Password" minlength="5" required>
             </div>
             <button type="submit" class="btn btn-outline-success" value="Submit">Submit</button>
         </form>
@@ -71,28 +77,7 @@ require_once("../../helpers/login_check.php");
 
     </center>
 
-    <?php
-    if (!empty($_POST)) {
-      if (isset($_POST["ssn"])) {
-        $query = 'insert into public.Employee(SSN, name, hotel_id, street_number, street_name, unit, city, province, country, zip, password) values(
-        ' . $_POST['ssn'] . ' , \'' . $_POST['name'] . '\', ' . $_POST['hotel_id'] . ' ,' . $_POST['streetnumber'] . ', \'' . $_POST['streetname'] . '\', \'' . $_POST['unit'] . '\', \'' . $_POST['city'] . '\',
-        \'' . $_POST['province'] . '\', \'' . $_POST['country'] . '\', \'' . $_POST['zip'] . '\',
-        \'' . $_POST['password'] . '\')';
-        $result = pg_query($query);
-        print_r($query);
-
-        if (!$result) {
-            $_SESSION['message'] = "Edit failed";
-          header("Location: ../manager_employees.php");
-        } else {
-            $_SESSION['message'] = "Edit Successful";
-          header("Location: ../manager_employees.php");
-        }
-      }
-    }
-
-
-    ?>
+    
 
 
 
