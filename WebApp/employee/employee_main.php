@@ -15,7 +15,7 @@ include("employee_nav.php")
 ?>
 
 <center>
-<h1 class="title">  Welcome 
+<h1 class="title">  Welcome Employee 
 <?php
 echo $_SESSION['user_id'];
 ?>

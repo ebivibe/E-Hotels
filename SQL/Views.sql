@@ -7,7 +7,7 @@ CREATE VIEW employeeroles AS
 DROP VIEW IF EXISTS bookinginfo;
 CREATE VIEW bookinginfo as
   SELECT br.booking_id, br.reservation_date, br.check_in_date, br.check_out_date, br.checked_in, br.paid, 
-  r.room_number, hc.chain_name, h.street_number, h.street_name, h.unit, h.city, h.province, h.country, h.zip, br.employee_ssn,
+  r.room_number, hc.chain_name, h.hotel_id, h.street_number, h.street_name, h.unit, h.city, h.province, h.country, h.zip, br.employee_ssn,
   br.customer_ssn
   FROM BookingRental br
   INNER JOIN Room r on br.room_id = r.room_id
