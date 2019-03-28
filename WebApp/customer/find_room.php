@@ -64,9 +64,9 @@ require_once("../helpers/login_check.php");
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-success" value="Submit">Find Rooms</button>
-
+                </div>
         </form>
-        </div>
+
 
         <?php
 
@@ -93,7 +93,7 @@ require_once("../helpers/login_check.php");
 
 
                 $query = 'Select room_id, room_number, chain_name, street_number, street_name, unit,
-                city, province, country, zip, capacity, price, category, num_rooms from roominfo where damages=false';
+                city, province, country, zip, capacity, price, category, num_rooms from roominfo r where damages=false';
 
                 if(strlen($_POST["capacity"])>0){
                     $query .= ' and capacity ='.$_POST["capacity"];
@@ -117,6 +117,9 @@ require_once("../helpers/login_check.php");
                 if(strlen($_POST["price"])>0){
                     $query .= ' and price <='.$_POST["price"];
                 }
+                $query .=' and (select b.room_id from BookingRental b where (SELECT (TIMESTAMP \''.$_POST["start_date"].'\', TIMESTAMP \''.$_POST["end_date"].'\')
+                                                              OVERLAPS (check_in_date, check_out_date)) and b.room_id = r.room_id limit 1) is null';
+                
                 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
                 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
