@@ -6,6 +6,11 @@ employee = "Employee(ssn, name, hotel_id, street_number, street_name, city, prov
 customer = "Customer(ssn, name, street_number, street_name, city, province, country, zip, password) VALUES (%d, '%s', %d, '%s', '%s', '%s', '%s', '%s', '%s');"
 room = "Room(room_number, hotel_id, price, capacity, sea_view, mountain_view, damages, can_be_extended) VALUES (%d, %d, %.2f, %d, %s, %s, %s, %s);"
 booking = "BookingRental(reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn) VALUES (%s, %s, %s, %s, %d, %d);"
+amenity = "Amenity(room_id, name, description) VALUES (%d, '%s', %s);"
+role = "Role(name, description) VALUES ('%s', %s);"
+employeerole = "EmployeeRole(employee_ssn, role_id) VALUES (%d, %d);"
+chainphonenumber = "ChainPhoneNumber(chain_id, phone_number) VALUES (%d, '%s');"
+hotelphonenumber = "HotelPhoneNumber(hotel_id, phone_number) VALUES (%d, '%s');"
 ins = "INSERT INTO "
 
 chains = 5
@@ -24,6 +29,8 @@ last_names = ["Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller
 cities = ["Toronto", "London", "Milton", "Ottawa", "Mississauga", "Oshawa", "Oakville", "Brampton", "Hamilton", "Stratford"]
 street_names = ["Bank", "First", "Third", "Main", "Second", "Metcalfe", "Bay", "Pine", "Elm", "Oak", "Willow", "Laurier"]
 street_types = ["Avenue", "Street", "Crescent", "Boulevard", "Lane", "Way"]
+am_names = ["Coffee Machine", "Mini-Fridge", "TV", "Room service", "Air conditioner", "Laundry Machine"]
+role_names = ["Custodian", "Maid", "Bellboy", "Front Desk Person"]
 
 
 n = len(first_names)
@@ -31,6 +38,8 @@ m = len(last_names)
 c = len(cities)
 s = len(street_names)
 t = len(street_types)
+a = len(am_names)
+r = len(role_names)
 
 employee_ssn = 0
 customer_ssn = 0
@@ -126,7 +135,36 @@ for i in range(chains):
                 query = ins + (booking % (reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn))
                 queries.append(query)
 
+for i in range(room_ids):
+    amenities = bin(random.randint(0, (1<<a)-1))[2:]
+    if len(amenities) < 6:
+        amenities = ('0' * (6-len(amenities))) + amenities
+    for j in range(len(amenities)):
+        if amenities[j] == "1":
+            room_id = i+1
+            name = am_names[j]
+            description = "NULL"
+            query = ins + (amenity % (room_id, name, description))
+            queries.append(query)
 
+for i in range(r):
+    query = ins + (role % (role_names[i], "NULL"))
+    queries.append(query)
+
+for i in range(employee_ssn):
+    er = random.randint(1, r)
+    query = ins + (employeerole % (i+1, er))
+    queries.append(query)
+
+for i in range(chains):
+    phone_number = str(random.randint(1000000000, 9999999999))
+    query = ins + (chainphonenumber % (i+1, phone_number))
+    queries.append(query)
+
+for i in range(hotel_id):
+    phone_number = str(random.randint(1000000000, 9999999999))
+    query = ins + (hotelphonenumber % (i+1, phone_number))
+    queries.append(query)
 
 with open(fname, "w") as f:
     for q in queries:
