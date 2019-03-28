@@ -53,6 +53,22 @@ CREATE OR REPLACE FUNCTION update_archive() RETURNS TRIGGER AS $update_archive$
     END;
 $update_archive$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION inc_room() RETURNS TRIGGER AS $inc_room$
+    BEGIN UPDATE Hotel
+        SET num_rooms = num_rooms + 1
+        WHERE hotel_id = NEW.hotel_id;
+    RETURN NULL;
+    END;
+$inc_room$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION dec_room() RETURNS TRIGGER AS $dec_room$
+    BEGIN UPDATE Hotel
+        SET num_rooms = num_rooms - 1
+        WHERE hotel_id = NEW.hotel_id;
+    RETURN NULL;
+    END;
+$dec_room$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION inc() RETURNS TRIGGER AS $inc$
 	BEGIN UPDATE HotelChain 
 		SET num_hotels = num_hotels + 1 
@@ -69,7 +85,6 @@ CREATE OR REPLACE FUNCTION decr() RETURNS TRIGGER AS $decr$
     END;
 $decr$ LANGUAGE plpgsql;
 		
-
 DROP TRIGGER IF EXISTS add_archive ON BookingRental;
 CREATE TRIGGER add_archive 
     AFTER INSERT ON BookingRental 
@@ -93,3 +108,15 @@ CREATE TRIGGER decrement
     AFTER DELETE ON Hotel
     FOR EACH ROW
     EXECUTE FUNCTION decr();
+
+DROP TRIGGER IF EXISTS inc_rooms ON Room;
+CREATE TRIGGER inc_rooms
+    AFTER INSERT ON Room
+    FOR EACH ROW
+    EXECUTE FUNCTION inc_room();
+
+DROP TRIGGER IF EXISTS dec_rooms ON Room;
+CREATE TRIGGER dec_roooms
+    AFTER DELETE ON Room
+    FOR EACH ROW
+    EXECUTE FUNCTION dec_room();

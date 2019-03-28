@@ -29,6 +29,7 @@ CREATE TABLE Hotel (
  hotel_id SERIAL PRIMARY KEY,
  chain_id INTEGER NOT NULL REFERENCES HotelChain(chain_id) ON DELETE CASCADE,
  category INT NOT NULL,
+ num_rooms INT DEFAULT 0 NOT NULL,
  email VARCHAR(255) NOT NULL,
  street_number INT NOT NULL,
  street_name VARCHAR(255) NOT NULL,

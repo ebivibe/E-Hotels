@@ -26,3 +26,26 @@ CREATE VIEW roomcapacity AS
   SELECT h.hotel_id, r.room_id, r.room_number, r.capacity, r.can_be_extended
   FROM Hotel h, Room r
   WHERE r.hotel_id = h.hotel_id;
+
+DROP VIEW IF EXISTS roominfo;
+CREATE VIEW roominfo AS
+  SELECT r.room_id,
+    r.room_number,
+    r.capacity,
+    r.price,
+    r.can_be_extended,
+    r.sea_view,
+    r.mountain_view,
+    r.damages,
+    h.category,
+    h.street_number,
+    h.street_name,
+    h.unit,
+    h.city,
+    h.province,
+    h.country,
+    h.zip,
+    hc.chain_name
+  FROM Hotel h, Room r, HotelChain hc
+  WHERE h.hotel_id = r.hotel_id AND
+    hc.chain_id = h.chain_id; 
