@@ -32,11 +32,11 @@ require_once("../helpers/login_check.php");
         <form action="" method="post" class='loginform'>
             <div class="container">
                 <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="start_date" placeholder="Start Date" required>
+                    <div class="form-group date">
+                        <input type="date" class="form-control" name="start_date" placeholder="Start Date" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="end_date" placeholder="End Date" required>
+                        <input type="date" class="form-control" name="end_date" placeholder="End Date" required>
                     </div>
                 </div>
                 <div class="row">
@@ -64,7 +64,7 @@ require_once("../helpers/login_check.php");
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-success" value="Submit">Find Rooms</button>
-                </div>
+            </div>
         </form>
 
 
@@ -95,32 +95,32 @@ require_once("../helpers/login_check.php");
                 $query = 'Select room_id, room_number, chain_name, street_number, street_name, unit,
                 city, province, country, zip, capacity, price, category, num_rooms from roominfo r where damages=false';
 
-                if(strlen($_POST["capacity"])>0){
-                    $query .= ' and capacity ='.$_POST["capacity"];
+                if (strlen($_POST["capacity"]) > 0) {
+                    $query .= ' and capacity =' . $_POST["capacity"];
                 }
-                if(strlen($_POST["category"])>0){
-                    $query .= ' and category >='.$_POST["category"];
-                }
-                
-                if(strlen($_POST["city"])>0){
-                    $query .= ' and city ILIKE \'%'.$_POST["city"].'%\'';
+                if (strlen($_POST["category"]) > 0) {
+                    $query .= ' and category >=' . $_POST["category"];
                 }
 
-                
-                if(strlen($_POST["chain_name"])>0){
-                    $query .= ' and chain_name ILIKE \'%'.$_POST["chain_name"].'%\'';
+                if (strlen($_POST["city"]) > 0) {
+                    $query .= ' and city ILIKE \'%' . $_POST["city"] . '%\'';
                 }
 
-                if(strlen($_POST["num_rooms"])>0){
-                    $query .= ' and num_rooms ='.$_POST["num_rooms"];
+
+                if (strlen($_POST["chain_name"]) > 0) {
+                    $query .= ' and chain_name ILIKE \'%' . $_POST["chain_name"] . '%\'';
                 }
-                if(strlen($_POST["price"])>0){
-                    $query .= ' and price <='.$_POST["price"];
+
+                if (strlen($_POST["num_rooms"]) > 0) {
+                    $query .= ' and num_rooms =' . $_POST["num_rooms"];
                 }
-                $query .=' and (select b.room_id from BookingRental b where (SELECT (TIMESTAMP \''.$_POST["start_date"].'\', TIMESTAMP \''.$_POST["end_date"].'\')
+                if (strlen($_POST["price"]) > 0) {
+                    $query .= ' and price <=' . $_POST["price"];
+                }
+                $query .= ' and (select b.room_id from BookingRental b where (SELECT (TIMESTAMP \'' . $_POST["start_date"] . '\', TIMESTAMP \'' . $_POST["end_date"] . '\')
                                                               OVERLAPS (check_in_date, check_out_date)) and b.room_id = r.room_id limit 1) is null';
-                
-                $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+
+                $result = pg_query($query);
 
                 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
                     echo "\t<tr scope=\"row\">\n";

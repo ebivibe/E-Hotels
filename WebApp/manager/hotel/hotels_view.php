@@ -25,6 +25,7 @@ require_once("../../helpers/login_check.php");
                     <th scope="col">Chain ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
+                    <th scope="col"># Hotels</th>
                     <th scope="col">Email</th>
                     <th scope="col">Street #</th>
                     <th scope="col">Street Name</th>
