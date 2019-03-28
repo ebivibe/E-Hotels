@@ -31,3 +31,10 @@
 .customertable{
     margin-top: 10px;
 }
+.form-group{
+    margin-right: 5px;
+    display: inline;
+}
+.row{
+    margin-left: 70px;
+}
