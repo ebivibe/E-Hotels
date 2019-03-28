@@ -20,3 +20,9 @@ CREATE VIEW roomarea AS
   FROM Room r
   INNER JOIN Hotel h on r.hotel_id = h.hotel_id
   INNER JOIN HotelChain hc on h.chain_id = hc.chain_id;
+  
+DROP VIEW IF EXISTS roomcapacity;
+CREATE VIEW roomcapacity AS
+  SELECT h.hotel_id, r.room_id, r.room_number, r.capacity, r.can_be_extended
+  FROM Hotel h, Room r
+  WHERE r.hotel_id = h.hotel_id;
