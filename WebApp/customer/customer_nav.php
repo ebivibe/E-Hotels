@@ -9,6 +9,12 @@
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px"href="find_room.php">Find a Room</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link btn-light btn" style="color:black;margin-right:10px"href="find_room.php">Capacities Per Hotel</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link btn-light btn" style="color:black;margin-right:10px"href="find_room.php">Available Rooms Per Area</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="view_bookings.php">See My Bookings</a>
     </li>
   </ul>

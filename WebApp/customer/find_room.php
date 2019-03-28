@@ -41,30 +41,32 @@ require_once("../helpers/login_check.php");
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <input type="number" class="form-control" name="capacity" placeholder="Room Capacity" required>
+                        <input type="number" class="form-control" name="capacity" placeholder="Room Capacity">
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="capacity" placeholder="Minimum Category (1-5)" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="city" placeholder="City" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="chain_name" placeholder="Chain Name" required>
+                        <input type="number" class="form-control" name="category" placeholder="Min Category (1-5)">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <input type="number" class="form-control" name="num_rooms" placeholder="Number of Rooms" required>
+                        <input type="text" class="form-control" name="city" placeholder="City">
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="price" placeholder="Maximum Price" required>
+                        <input type="text" class="form-control" name="chain_name" placeholder="Chain Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="num_rooms" placeholder="#Rooms in Hotel">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="price" placeholder="Maximum Price">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-success" value="Submit">Find Rooms</button>
+
         </form>
+        </div>
 
         <?php
 
@@ -80,7 +82,7 @@ require_once("../helpers/login_check.php");
                     <th scope="col">Capacity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Number of Rooms in Hotel</th>
+                    <th scope="col">#Rooms in Hotel</th>
                     <th scope="col"> </th>
                 </tr>
             </thead>
@@ -90,19 +92,44 @@ require_once("../helpers/login_check.php");
 
 
 
-                $query = 'Select room_id, room_number, chain_name, hotel_id, street_number, street_name, unit,
-                city, province, country from roominfo where damages=false';
+                $query = 'Select room_id, room_number, chain_name, street_number, street_name, unit,
+                city, province, country, zip, capacity, price, category, num_rooms from roominfo where damages=false';
 
+                if(strlen($_POST["capacity"])>0){
+                    $query .= ' and capacity ='.$_POST["capacity"];
+                }
+                if(strlen($_POST["category"])>0){
+                    $query .= ' and category >='.$_POST["category"];
+                }
+                
+                if(strlen($_POST["city"])>0){
+                    $query .= ' and city ILIKE \'%'.$_POST["city"].'%\'';
+                }
+
+                
+                if(strlen($_POST["chain_name"])>0){
+                    $query .= ' and chain_name ILIKE \'%'.$_POST["chain_name"].'%\'';
+                }
+
+                if(strlen($_POST["num_rooms"])>0){
+                    $query .= ' and num_rooms ='.$_POST["num_rooms"];
+                }
+                if(strlen($_POST["price"])>0){
+                    $query .= ' and price <='.$_POST["price"];
+                }
                 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
                 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
                     echo "\t<tr scope=\"row\">\n";
                     echo "\t\t<td>" . $line["room_number"] . "</td>\n";
                     echo "\t\t<td>" . $line["chain_name"] . "</td>\n";
-                    echo "\t\t<td>" . $line["paid"] . "</td>\n";
+                    echo "\t\t<td>" . $line["unit"] . " " . $line["street_number"] . " " . $line["street_name"] . " " . $line["street_number"] . " 
+                    , " . $line["city"] . ", " . $line["province"] . ", " . $line["country"] . " 
+                    " . $line["zip"] . "</td>\n";
                     echo "\t\t<td>" . $line["capacity"] . "</td>\n";
                     echo "\t\t<td>" . $line["price"] . "</td>\n";
                     echo "\t\t<td>" . $line["category"] . "</td>\n";
+                    echo "\t\t<td>" . $line["num_rooms"] . "</td>\n";
                     echo "<td>
                   <div class=\"dropdown\">
                   <button class=\"btn btn-outline-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
