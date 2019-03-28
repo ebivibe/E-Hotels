@@ -32,11 +32,11 @@ require_once("../helpers/login_check.php");
         <form action="" method="post" class='loginform'>
             <div class="container">
                 <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="start_date" placeholder="Start Date" required>
+                    <div class="form-group date">
+                        <input type="date" class="form-control" name="start_date" placeholder="Start Date" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="end_date" placeholder="End Date" required>
+                        <input type="date" class="form-control" name="end_date" placeholder="End Date" required>
                     </div>
                 </div>
                 
