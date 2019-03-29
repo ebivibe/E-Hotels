@@ -11,6 +11,10 @@
     <li class="nav-item">
       <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="rooms_view">Walk in Booking</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link btn-light btn" style="color:black;margin-right:10px" href="employee_roles">Roles</a>
+    </li>
+    
   </ul>
 
 </nav>

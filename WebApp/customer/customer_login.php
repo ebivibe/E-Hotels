@@ -32,7 +32,7 @@ if(isset($_SESSION['user_id'] )){
 
 <form action="" method="post" class='loginform'>
   <div class="form-group">
-    <input type="text" class="form-control" name="username" placeholder="Enter your username" required>
+    <input type="number" class="form-control" name="username" placeholder="Enter your username" required>
    </div>
   <div class="form-group">
     <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -47,14 +47,15 @@ if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
       $query = 'SELECT exists(Select * FROM public.Customer where SSN='.$_POST['username']." and password='".$_POST['password']."')";
       $result = pg_query($query) ;
-    
+      $row = pg_fetch_row($result);
       
-      if(!$result){
+      if($row[0]==="f"){
       $_SESSION['message'] = "Log in failed";
       header("Location: customer_login.php");
       } else{
-       // $row = pg_fetch_row($result)
         $_SESSION['user_id'] = $_POST['username'];
+        $_SESSION['permission'] = "customer";
+        
         header("Location: customer_main.php");
       }
 

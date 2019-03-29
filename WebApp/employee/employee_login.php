@@ -32,7 +32,7 @@ if(isset($_SESSION['user_id'] )){
 
 <form action="" method="post" class='loginform'>
   <div class="form-group">
-    <input type="text" class="form-control" name="username" placeholder="Enter your username" required>
+    <input type="number" class="form-control" name="username" placeholder="Enter your username" required>
    </div>
   <div class="form-group">
     <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -56,6 +56,7 @@ if ( ! empty( $_POST ) ) {
     } else{
      // $row = pg_fetch_row($result)
       $_SESSION['user_id'] = $_POST['username'];
+      $_SESSION['permission'] = "employee";
       header("Location: employee_main.php");
     }
 
