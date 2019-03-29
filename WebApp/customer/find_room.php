@@ -139,8 +139,10 @@ require_once("../helpers/login_check.php");
                     Options
                   </button>
                   <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"dropdownMenuButton\">
-                  <form action=\"book_room.php\" method=\"post\">
-                  <input type=\"hidden\" name=\"id\" value=\"" . $line["room_id"] . "\"/>
+                  <form action=\"booking_add_request.php\" method=\"post\">
+                  <input type=\"hidden\" name=\"room_id\" value=\"" . $line["room_id"] . "\"/>
+                  <input type=\"hidden\" name=\"check_in_date\" value=\"" . $_POST["start_date"] . "\"/>
+                  <input type=\"hidden\" name=\"check_out_date\" value=\"" . $_POST["end_date"] . "\"/>
                   <input class=\"dropdown-item\" type=\"submit\" name=\"submit-btn\" value=\"Book Room\" />
                   </form>";
 

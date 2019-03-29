@@ -35,8 +35,8 @@ require_once("../helpers/login_check.php");
             <thead>
                 <tr>
                     <th scope="col">Reservation Date</th>
-                    <th scope="col">Checked In Date</th>
-                    <th scope="col">Checked Out Date</th>
+                    <th scope="col">Check In Date</th>
+                    <th scope="col">Check Out Date</th>
                     <th scope="col">Checked In</th>
                     <th scope="col">Paid</th>
                     <th scope="col">Chain Name</th>
