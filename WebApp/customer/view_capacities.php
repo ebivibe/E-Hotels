@@ -34,7 +34,7 @@ require_once("../helpers/login_check.php");
                       if (isset($_POST["id"])) {
                         
 
-                        $query = 'SELECT * FROM public.Room where hotel_id=' . $_POST["id"] . 'order by room_id';
+                        $query = 'SELECT * FROM public.roomcapacity where hotel_id=' . $_POST["id"] . 'order by room_id';
                         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
                         while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {

@@ -67,7 +67,7 @@ require_once("../helpers/login_check.php");
 
 
                 $query = 'Select COUNT(room_id) as num, city, province, country 
-                from roominfo r where damages=false and 
+                from roomarea r where damages=false and 
                 (select b.room_id from BookingRental b where (SELECT (TIMESTAMP \''.$_POST["start_date"].'\', 
                 TIMESTAMP \''.$_POST["end_date"].'\') OVERLAPS (check_in_date, check_out_date)) and b.room_id 
                 = r.room_id limit 1) is null GROUP BY city, province, country';

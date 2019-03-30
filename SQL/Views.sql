@@ -24,7 +24,7 @@ CREATE VIEW roomarea2 AS
 
 DROP VIEW IF EXISTS roomarea;
 CREATE VIEW roomarea AS
-  SELECT r.room_id, h.city, h.province, h.country
+  SELECT r.room_id, r.damages, h.city, h.province, h.country
   FROM Room r
   INNER JOIN Hotel h on r.hotel_id = h.hotel_id;
 
