@@ -11,6 +11,7 @@ role = "Role(name, description) VALUES ('%s', %s);"
 employeerole = "EmployeeRole(employee_ssn, role_id) VALUES (%d, %d);"
 chainphonenumber = "ChainPhoneNumber(chain_id, phone_number) VALUES (%d, '%s');"
 hotelphonenumber = "HotelPhoneNumber(hotel_id, phone_number) VALUES (%d, '%s');"
+manages = "Manages(SSN, hotel_id) VALUES (%d, %d);"
 ins = "INSERT INTO "
 
 chains = 5
@@ -41,11 +42,11 @@ t = len(street_types)
 a = len(am_names)
 r = len(role_names)
 
-employee_ssn = 0
-customer_ssn = 0
+ssn = 0
 hotel_id = 0
 room_ids = 0
 reservations = {}
+employee_ssns = []
 
 for i in range(chains):
     chain = i + 1
@@ -87,7 +88,7 @@ for i in range(chains):
             queries.append(query)
         
         for k in range(employees):
-            employee_ssn += 1
+            ssn += 1
             name = first_names[random.randint(0, n-1)] + " " + last_names[random.randint(0, m-1)]
             street_number = random.randint(1, 400)
             street_name = street_names[random.randint(0, s-1)] + " " + street_types[random.randint(0, t-1)]
@@ -96,11 +97,16 @@ for i in range(chains):
             country = "Canada"
             postal = "X1X 1X1"
             password = "password"
-            query = ins + (employee % (employee_ssn, name, hotel_id, street_number, street_name, city, province, country, postal, password))
+            query = ins + (employee % (ssn, name, hotel_id, street_number, street_name, city, province, country, postal, password))
             queries.append(query)
+            if k == 0:
+                query = ins + (manages % (ssn, hotel_id))
+                queries.append(query)
+            else:
+                employee_ssns.append(ssn) # Only if they're not a manager so we can add non-manager roles to them
         
         for k in range(customers):
-            customer_ssn += 1
+            ssn += 1
             name = first_names[random.randint(0, n-1)] + " " + last_names[random.randint(0, m-1)]
             street_number = random.randint(1, 400)
             street_name = street_names[random.randint(0, s-1)] + " " + street_types[random.randint(0, t-1)]
@@ -109,7 +115,7 @@ for i in range(chains):
             country = "Canada"
             postal = "X1X 1X1"
             password = "password"
-            query = ins + (customer % (customer_ssn, name, street_number, street_name, city, province, country, postal, password))
+            query = ins + (customer % (ssn, name, street_number, street_name, city, province, country, postal, password))
             queries.append(query)
             
             for l in range(bookings):
@@ -131,7 +137,7 @@ for i in range(chains):
                 check_in_date = "now() + INTERVAL '%d DAY'" % in_d
                 check_out_date = "now() + INTERVAL '%d DAY'" % out_d
                 checked_in = "false"
-                customer_ssn = customer_ssn
+                customer_ssn = ssn
                 query = ins + (booking % (reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn))
                 queries.append(query)
 
@@ -151,9 +157,9 @@ for i in range(r):
     query = ins + (role % (role_names[i], "NULL"))
     queries.append(query)
 
-for i in range(employee_ssn):
+for i in employee_ssns:
     er = random.randint(1, r)
-    query = ins + (employeerole % (i+1, er))
+    query = ins + (employeerole % (i, er))
     queries.append(query)
 
 for i in range(chains):
