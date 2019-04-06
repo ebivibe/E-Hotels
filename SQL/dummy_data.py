@@ -134,8 +134,8 @@ for i in range(chains):
                     if clear:
                         reservations[room_id].append(list(rang))
                         break
-                check_in_date = "now() + INTERVAL '%d DAY'" % in_d
-                check_out_date = "now() + INTERVAL '%d DAY'" % out_d
+                check_in_date = "now() + INTERVAL '1 YEAR' + INTERVAL '%d DAY'" % in_d
+                check_out_date = "now() + INTERVAL '1 YEAR' + INTERVAL '%d DAY'" % out_d
                 checked_in = "false"
                 customer_ssn = ssn
                 query = ins + (booking % (reservation_date, check_in_date, check_out_date, checked_in, room_id, customer_ssn))
