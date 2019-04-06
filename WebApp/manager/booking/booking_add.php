@@ -29,21 +29,21 @@ require_once("../../helpers/login_check.php");
             <div class="form-group">
                 <label for="name">Reservation Date:</label>
                 <?php
-               date_picker("reservation_date", "Enter the reservation date");
-               //echo "<input type=\"text\" class=\"form-control\" name=\"reservation_date\" placeholder=\"Reservation Date\"  required>";
+               //date_picker("reservation_date", "Enter the reservation date");
+               echo "<input type=\"date\" class=\"form-control\" name=\"reservation_date\" placeholder=\"Reservation Date\"  required>";
                 ?></div>
             <div class="form-group">
                 <label for="email">Check In Date:</label>
                 <?php
-                date_picker("check_in_date", "Enter the check in date");
-                //echo " <input type=\"text\" class=\"form-control\" name=\"check_in_date\" placeholder=\"Check In Date\"  required> ";
+                //date_picker("check_in_date", "Enter the check in date");
+                echo " <input type=\"date\" class=\"form-control\" name=\"check_in_date\" placeholder=\"Check In Date\"  required> ";
                 ?>
                 </div>
             <div class="form-group">
                 <label for="email">Check Out Date:</label>
                 <?php
-                date_picker("check_out_date", "Enter the check out date");
-                //echo " <input type=\"text\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
+                //date_picker("check_out_date", "Enter the check out date");
+                echo " <input type=\"date\" class=\"form-control\" name=\"check_out_date\" placeholder=\"Check Out Date\"  required>";
                 ?>
                 </div>
             <div class="form-group">
