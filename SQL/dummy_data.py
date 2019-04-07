@@ -27,7 +27,7 @@ queries = []
 hname = "Hotels "
 first_names = ["Bob", "Andrew", "Ashley", "Elizabeth", "Liam", "David", "Hudi", "Alex", "Natalia", "Ivana", "Jon", "Nick", "Ryan", "Meg", "Sarah", "Susan", "Mary", "Emily", "Sahil", "Paul"]
 last_names = ["Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Hernandez", "Young", "Rogers", "Reed", "Cook", "Wood", "Price", "Sanchez", "Stewart", "Ward", "Perez"]
-cities = ["Toronto", "London", "Milton", "Ottawa", "Mississauga", "Oshawa", "Oakville", "Brampton", "Hamilton", "Stratford"]
+cities = ["Toronto", "London", "Ottawa", "Mississauga"] #"Milton", "Oshawa", "Oakville", "Brampton", "Hamilton", "Stratford"]
 street_names = ["Bank", "First", "Third", "Main", "Second", "Metcalfe", "Bay", "Pine", "Elm", "Oak", "Willow", "Laurier"]
 street_types = ["Avenue", "Street", "Crescent", "Boulevard", "Lane", "Way"]
 am_names = ["Coffee Machine", "Mini-Fridge", "TV", "Room service", "Air conditioner", "Laundry Machine"]
@@ -79,7 +79,7 @@ for i in range(chains):
             room_ids += 1
             room_number = random.randint(1, 100)
             price = random.randint(40, 60) * category / 1.2
-            capacity = random.randint(2, 6)
+            capacity = (k+1) % 6
             sea_view = ("%s" % (random.randint(1, 17) > 10)).lower()
             mountain_view = ("%s" % (random.randint(1, 37) > 20)).lower()
             damages = ("%s" % (random.randint(1, 100) < 15)).lower()
